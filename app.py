@@ -6,6 +6,7 @@ from plotly.subplots import make_subplots
 import numpy as np
 from pathlib import Path
 import sys
+import streamlit.components.v1 as components
 
 def create_responsive_layout_config():
     """
@@ -161,10 +162,23 @@ def get_risk_color_classe(classe):
     }
     return cores.get(classe, '#6b7280')
 
+import base64
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
 ## dados geral
 panorama_data, ranking_data, cargo_data, setor_data, matriz_data, detalhamento_data = carregar_dados()
 
 ## CSS sidebar
+
+logo_base64 = get_base64_image("archives/logo.png")
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode()
+
+# Carregar a logo
+logo_base64 = get_base64_image("archives/logo.png")  # Ajuste o nome do arquivo se necessário
 
 st.markdown("""
     <style>
@@ -328,49 +342,24 @@ st.markdown("""
 
 ## SIDEBAR
 with st.sidebar:
-    st.markdown("""
-        <div style='text-align: center; padding: 2.5rem 1rem 2rem 1rem; 
-                    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 242, 230, 0.7) 100%);
-                    border-radius: 24px;
-                    backdrop-filter: blur(15px);
-                    margin-bottom: 2.5rem;
-                    border: 2px solid rgba(196, 166, 114, 0.3);
-                    box-shadow: 0 8px 32px rgba(107, 88, 71, 0.15), 
-                                inset 0 2px 4px rgba(255, 255, 255, 0.9),
-                                0 0 60px rgba(212, 180, 130, 0.2);
-                    position: relative;
-                    overflow: hidden;'>
-            <div style='position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-                        background: radial-gradient(circle, rgba(212, 180, 130, 0.15) 0%, transparent 70%);
-                        animation: rotate 15s linear infinite;'></div>
+    st.markdown(f"""
+        <div style='text-align: center; padding: 2.5rem 1rem 2rem 1rem; background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(248, 242, 230, 0.7) 100%); border-radius: 24px; backdrop-filter: blur(15px); margin-bottom: 2.5rem; border: 2px solid rgba(196, 166, 114, 0.3); box-shadow: 0 8px 32px rgba(107, 88, 71, 0.15), inset 0 2px 4px rgba(255, 255, 255, 0.9), 0 0 60px rgba(212, 180, 130, 0.2); position: relative; overflow: hidden;'>
+            <div style='position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(212, 180, 130, 0.15) 0%, transparent 70%); animation: rotate 15s linear infinite;'></div>
             <div style='position: relative; z-index: 1;'>
-                <h1 style='margin: 0; font-size: 4rem; font-weight: 900; 
-                           background: linear-gradient(135deg, #a88846 0%, #c4a672 50%, #8b7663 100%);
-                           -webkit-background-clip: text;
-                           -webkit-text-fill-color: transparent;
-                           letter-spacing: 4px;
-                           font-style: italic;
-                           filter: drop-shadow(0 4px 12px rgba(168, 136, 70, 0.3));'>NR1</h1>
-                <div style='height: 2px; width: 70px; margin: 1.2rem auto;
-                            background: linear-gradient(90deg, transparent, #c4a672, transparent);
-                            box-shadow: 0 0 8px rgba(196, 166, 114, 0.5);'></div>
-                <p style='margin: 0; font-size: 0.8rem; color: #6b5847; 
-                          font-weight: 700; letter-spacing: 2.5px;
-                          text-transform: uppercase;
-                          text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);'>
-                    Gestão de Riscos Psicossociais
-                </p>
+                <img src="data:image/png;base64,{logo_base64}" alt="Logo" style='width: clamp(100px, 25vw, 150px); height: auto; margin-bottom: 1rem; filter: drop-shadow(0 4px 12px rgba(168, 136, 70, 0.3)); border-radius: 12px;'/>
+                <p style='margin: 0 0 1.5rem 0; font-size: clamp(0.9rem, 2.2vw, 1.1rem); color: #6b5847; font-weight: 600; letter-spacing: 1px; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);'>Luana Portella</p>
+                <div style='height: 2px; width: clamp(50px, 15vw, 70px); margin: 1.2rem auto; background: linear-gradient(90deg, transparent, #c4a672, transparent); box-shadow: 0 0 8px rgba(196, 166, 114, 0.5);'></div>
+                <p style='margin: 0; font-size: clamp(0.65rem, 1.8vw, 0.8rem); color: #6b5847; font-weight: 700; letter-spacing: clamp(1.5px, 0.5vw, 2.5px); text-transform: uppercase; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);'>Gestão de Riscos Psicossociais</p>
             </div>
         </div>
-        
         <style>
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+        @keyframes rotate {{
+            from {{ transform: rotate(0deg); }}
+            to {{ transform: rotate(360deg); }}
+        }}
         </style>
     """, unsafe_allow_html=True)
-    
+
     st.markdown("""
         <div style='margin-bottom: 1.25rem; padding-left: 0.5rem;'>
             <div style='display: inline-block; padding: 0.5rem 1.2rem;
@@ -2784,10 +2773,10 @@ elif pagina == "Matriz de Risco":
             <div style='display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;'>
                 <div style='flex: 1; min-width: 200px;'>
                     <h1 style='margin: 0; color: #5a4a3a; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -0.5px;'>
-                        Matriz de Risco
+                        Matriz de Risco - Classificação
                     </h1>
                     <p style='margin: 0.4rem 0 0 0; color: #8b7663; font-size: clamp(0.85rem, 2vw, 1rem);'>
-                        Tradução executiva: Probabilidade × Severidade = Prioridade
+                        Probabilidade × Severidade = Nível de Risco (Crítico, Alto, Médio, Baixo)
                     </p>
                 </div>
                 <div style='background: linear-gradient(135deg, #c4a672 0%, #b89656 100%);
@@ -2810,34 +2799,91 @@ elif pagina == "Matriz de Risco":
         filter_cols = st.columns([1, 1])
         
         with filter_cols[0]:
-            unique_subescalas_matriz = sorted(matriz_data['subescala'].unique().tolist())
-            selected_subescalas_matriz = st.multiselect(
+            unique_subescalas_matriz2 = sorted(matriz_data['subescala'].unique().tolist())
+            selected_subescalas_matriz2 = st.multiselect(
                 "Fatores Psicossociais",
-                options=unique_subescalas_matriz,
-                default=unique_subescalas_matriz,
+                options=unique_subescalas_matriz2,
+                default=unique_subescalas_matriz2,
                 help="Selecione os fatores para visualizar na matriz",
-                key='matriz_subescalas'
+                key='matriz2_subescalas'
             )
         
         with filter_cols[1]:
-            show_labels_matriz = st.checkbox("Exibir Rótulos", value=True, help="Mostrar nomes dos fatores no gráfico", key='matriz_labels')
+            show_labels_matriz2 = st.checkbox("Exibir Rótulos", value=True, help="Mostrar nomes dos fatores no gráfico", key='matriz2_labels')
     
-    filtered_matriz = matriz_data[matriz_data['subescala'].isin(selected_subescalas_matriz)].copy()
+    filtered_matriz2 = matriz_data[matriz_data['subescala'].isin(selected_subescalas_matriz2)].copy()
     
-    if len(filtered_matriz) == 0:
+    if len(filtered_matriz2) == 0:
         st.warning("Nenhum dado encontrado com os filtros selecionados. Ajuste os filtros acima.")
         st.stop()
     
-    filtered_matriz['zona'] = 'Monitoramento'
-    filtered_matriz.loc[(filtered_matriz['probabilidade'] >= 0.7) & (filtered_matriz['severidade'] >= 3.5), 'zona'] = 'Ação Imediata'
-    filtered_matriz.loc[((filtered_matriz['probabilidade'] >= 0.5) | (filtered_matriz['severidade'] >= 3)) & 
-                    (filtered_matriz['zona'] == 'Monitoramento'), 'zona'] = 'Curto Prazo'
+    # Função para classificar o risco baseado na matriz fornecida
+    def classificar_risco(prob, sev):
+        # Probabilidade: A (Permanente=2.0), B (Intermitente=1.5), C (Esporádica=1.0), D (Eventual=0.5)
+        # Severidade: IV (Crítica=10.0), III (Grave=3.0), II (Moderada=2.0), I (Leve=1.0)
+        
+        # Mapear probabilidade para categoria (assumindo escala 0-1)
+        if prob >= 0.75:  # Permanente
+            prob_cat = 'A'
+            prob_peso = 2.0
+        elif prob >= 0.50:  # Intermitente
+            prob_cat = 'B'
+            prob_peso = 1.5
+        elif prob >= 0.25:  # Esporádica
+            prob_cat = 'C'
+            prob_peso = 1.0
+        else:  # Eventual
+            prob_cat = 'D'
+            prob_peso = 0.5
+        
+        # Mapear severidade para categoria (assumindo escala 0-5)
+        if sev >= 4.5:  # Crítica/Catastrófica
+            sev_cat = 'IV'
+            sev_peso = 10.0
+        elif sev >= 3.0:  # Grave
+            sev_cat = 'III'
+            sev_peso = 3.0
+        elif sev >= 2.0:  # Moderada
+            sev_cat = 'II'
+            sev_peso = 2.0
+        else:  # Leve
+            sev_cat = 'I'
+            sev_peso = 1.0
+        
+        # Calcular pontuação
+        pontuacao = prob_peso * sev_peso
+        
+        # Classificar baseado na matriz
+        # CRÍTICO: >= 5.0 (vermelho escuro)
+        # ALTO: >= 3.0 (laranja/amarelo)
+        # MÉDIO: >= 1.5 (verde claro/amarelo)
+        # BAIXO: < 1.5 (azul/verde)
+        
+        if pontuacao >= 5.0:
+            return 'CRÍTICO', pontuacao
+        elif pontuacao >= 3.0:
+            return 'ALTO', pontuacao
+        elif pontuacao >= 1.5:
+            return 'MÉDIO', pontuacao
+        else:
+            return 'BAIXO', pontuacao
     
-    acao_imediata = len(filtered_matriz[filtered_matriz['zona'] == 'Ação Imediata'])
-    curto_prazo = len(filtered_matriz[filtered_matriz['zona'] == 'Curto Prazo'])
-    monitoramento = len(filtered_matriz[filtered_matriz['zona'] == 'Monitoramento'])
+    # Aplicar classificação
+    filtered_matriz2['classificacao'] = filtered_matriz2.apply(
+        lambda row: classificar_risco(row['probabilidade'], row['severidade'])[0], axis=1
+    )
+    filtered_matriz2['pontuacao'] = filtered_matriz2.apply(
+        lambda row: classificar_risco(row['probabilidade'], row['severidade'])[1], axis=1
+    )
     
-    kpi1, kpi2, kpi3 = st.columns(3)
+    # Contar por classificação
+    critico = len(filtered_matriz2[filtered_matriz2['classificacao'] == 'CRÍTICO'])
+    alto = len(filtered_matriz2[filtered_matriz2['classificacao'] == 'ALTO'])
+    medio = len(filtered_matriz2[filtered_matriz2['classificacao'] == 'MÉDIO'])
+    baixo = len(filtered_matriz2[filtered_matriz2['classificacao'] == 'BAIXO'])
+    
+    # KPIs
+    kpi1, kpi2, kpi3, kpi4 = st.columns(4)
     
     with kpi1:
         st.markdown(f"""
@@ -2852,13 +2898,13 @@ elif pagina == "Matriz de Risco":
                         flex-direction: column;
                         justify-content: center;'>
                 <div style='color: #991b1b; font-size: clamp(0.7rem, 1.5vw, 0.8rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem;'>
-                    Ação Imediata
+                    Crítico
                 </div>
                 <div style='font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 800; color: #dc2626; line-height: 1; margin-bottom: 0.4rem;'>
-                    {acao_imediata}
+                    {critico}
                 </div>
                 <div style='color: #991b1b; font-size: clamp(0.7rem, 1.5vw, 0.75rem);'>
-                    Prob ≥70% E Sev ≥3.5
+                    Pontuação ≥ 5.0
                 </div>
             </div>
         """, unsafe_allow_html=True)
@@ -2876,37 +2922,61 @@ elif pagina == "Matriz de Risco":
                         flex-direction: column;
                         justify-content: center;'>
                 <div style='color: #92400e; font-size: clamp(0.7rem, 1.5vw, 0.8rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem;'>
-                    Curto Prazo
+                    Alto
                 </div>
                 <div style='font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 800; color: #f59e0b; line-height: 1; margin-bottom: 0.4rem;'>
-                    {curto_prazo}
+                    {alto}
                 </div>
                 <div style='color: #92400e; font-size: clamp(0.7rem, 1.5vw, 0.75rem);'>
-                    Prob ≥50% OU Sev ≥3.0
+                    Pontuação 3.0 - 4.9
                 </div>
             </div>
         """, unsafe_allow_html=True)
     
     with kpi3:
         st.markdown(f"""
-            <div style='background: linear-gradient(135deg, rgba(209, 250, 229, 0.95) 0%, rgba(187, 247, 208, 0.8) 100%);
+            <div style='background: linear-gradient(135deg, rgba(254, 249, 195, 0.95) 0%, rgba(253, 246, 178, 0.8) 100%);
                         padding: clamp(1rem, 3vw, 1.5rem);
                         border-radius: clamp(10px, 2vw, 14px);
-                        border: 2px solid rgba(16, 185, 129, 0.3);
-                        box-shadow: 0 3px 12px rgba(16, 185, 129, 0.12);
+                        border: 2px solid rgba(234, 179, 8, 0.3);
+                        box-shadow: 0 3px 12px rgba(234, 179, 8, 0.12);
                         text-align: center;
                         min-height: 120px;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;'>
-                <div style='color: #065f46; font-size: clamp(0.7rem, 1.5vw, 0.8rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem;'>
-                    Monitoramento
+                <div style='color: #713f12; font-size: clamp(0.7rem, 1.5vw, 0.8rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem;'>
+                    Médio
                 </div>
-                <div style='font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 800; color: #10b981; line-height: 1; margin-bottom: 0.4rem;'>
-                    {monitoramento}
+                <div style='font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 800; color: #eab308; line-height: 1; margin-bottom: 0.4rem;'>
+                    {medio}
                 </div>
-                <div style='color: #065f46; font-size: clamp(0.7rem, 1.5vw, 0.75rem);'>
-                    Demais casos
+                <div style='color: #713f12; font-size: clamp(0.7rem, 1.5vw, 0.75rem);'>
+                    Pontuação 1.5 - 2.9
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+    
+    with kpi4:
+        st.markdown(f"""
+            <div style='background: linear-gradient(135deg, rgba(219, 234, 254, 0.95) 0%, rgba(191, 219, 254, 0.8) 100%);
+                        padding: clamp(1rem, 3vw, 1.5rem);
+                        border-radius: clamp(10px, 2vw, 14px);
+                        border: 2px solid rgba(59, 130, 246, 0.3);
+                        box-shadow: 0 3px 12px rgba(59, 130, 246, 0.12);
+                        text-align: center;
+                        min-height: 120px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;'>
+                <div style='color: #1e3a8a; font-size: clamp(0.7rem, 1.5vw, 0.8rem); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem;'>
+                    Baixo
+                </div>
+                <div style='font-size: clamp(2rem, 5vw, 2.5rem); font-weight: 800; color: #3b82f6; line-height: 1; margin-bottom: 0.4rem;'>
+                    {baixo}
+                </div>
+                <div style='color: #1e3a8a; font-size: clamp(0.7rem, 1.5vw, 0.75rem);'>
+                    Pontuação < 1.5
                 </div>
             </div>
         """, unsafe_allow_html=True)
@@ -2921,66 +2991,59 @@ elif pagina == "Matriz de Risco":
                     margin-bottom: 2rem;
                     box-shadow: 0 4px 16px rgba(107, 88, 71, 0.08);'>
             <h3 style='margin: 0 0 1.5rem 0; color: #5a4a3a; font-size: clamp(1.1rem, 2.5vw, 1.3rem); font-weight: 700;'>
-                Entendendo a Matriz de Decisão
+                Matriz de Classificação de Riscos
             </h3>
-            <div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: clamp(1rem, 3vw, 2rem);'>
-                <div>
-                    <div style='color: #c4a672; font-weight: 700; font-size: clamp(0.75rem, 1.5vw, 0.8rem); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem;'>
-                        Problema Resolvido
-                    </div>
-                    <div style='color: #6b5847; font-size: clamp(0.85rem, 2vw, 0.95rem); line-height: 1.6;'>
-                        Elimina arbitrariedade nas decisões. Define <strong>critérios objetivos</strong> para curto, médio e longo prazo
-                    </div>
-                </div>
-                <div>
-                    <div style='color: #c4a672; font-weight: 700; font-size: clamp(0.75rem, 1.5vw, 0.8rem); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem;'>
-                        Pergunta Respondida
-                    </div>
-                    <div style='color: #6b5847; font-size: clamp(0.85rem, 2vw, 0.95rem); line-height: 1.6; font-style: italic;'>
-                        "Quais riscos exigem ação imediata e quais podem ser monitorados?"
-                    </div>
-                </div>
-                <div>
-                    <div style='color: #c4a672; font-weight: 700; font-size: clamp(0.75rem, 1.5vw, 0.8rem); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.6rem;'>
-                        Valor Estratégico
-                    </div>
-                    <div style='color: #6b5847; font-size: clamp(0.85rem, 2vw, 0.95rem); line-height: 1.6;'>
-                        <strong>Fala a língua da diretoria:</strong> Risco → Prioridade → Decisão. Facilita aprovação de recursos
-                    </div>
-                </div>
+            <div style='overflow-x: auto;'>
+                <table style='width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;'>
+                    <thead>
+                        <tr style='background: linear-gradient(135deg, #c4a672 0%, #b89656 100%);'>
+                            <th rowspan='2' style='padding: 1rem; color: white; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: 700;'>SEVERIDADE</th>
+                            <th colspan='4' style='padding: 1rem; color: white; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-weight: 700;'>PROBABILIDADE</th>
+                        </tr>
+                        <tr style='background: linear-gradient(135deg, #c4a672 0%, #b89656 100%);'>
+                            <th style='padding: 0.8rem; color: white; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-size: 0.9rem;'>A<br>Permanente<br>(2,0)</th>
+                            <th style='padding: 0.8rem; color: white; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-size: 0.9rem;'>B<br>Intermitente<br>(1,5)</th>
+                            <th style='padding: 0.8rem; color: white; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-size: 0.9rem;'>C<br>Esporádica<br>(1,0)</th>
+                            <th style='padding: 0.8rem; color: white; border: 1px solid rgba(255,255,255,0.2); text-align: center; font-size: 0.9rem;'>D<br>Eventual<br>(0,5)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; font-weight: 600; background: #f9fafb;'><strong>IV</strong> - Crítica/Catastrófica (10,0)</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #dc2626; color: white; font-weight: 700;'>CRÍTICO<br>20,0</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #dc2626; color: white; font-weight: 700;'>CRÍTICO<br>15,0</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #dc2626; color: white; font-weight: 700;'>CRÍTICO<br>10,0</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #dc2626; color: white; font-weight: 700;'>CRÍTICO<br>5,0</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; font-weight: 600; background: #f9fafb;'><strong>III</strong> - Grave (3,0)</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #dc2626; color: white; font-weight: 700;'>CRÍTICO<br>6,0</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #f59e0b; color: white; font-weight: 700;'>ALTO<br>4,5</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #f59e0b; color: white; font-weight: 700;'>ALTO<br>3,0</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #eab308; color: white; font-weight: 700;'>MÉDIO<br>1,5</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; font-weight: 600; background: #f9fafb;'><strong>II</strong> - Moderada (2,0)</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #f59e0b; color: white; font-weight: 700;'>ALTO<br>4,0</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #f59e0b; color: white; font-weight: 700;'>ALTO<br>3,0</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #eab308; color: white; font-weight: 700;'>MÉDIO<br>2,0</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #3b82f6; color: white; font-weight: 700;'>BAIXO<br>1,0</td>
+                        </tr>
+                        <tr>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; font-weight: 600; background: #f9fafb;'><strong>I</strong> - Leve (1,0)</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #eab308; color: white; font-weight: 700;'>MÉDIO<br>2,0</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #eab308; color: white; font-weight: 700;'>MÉDIO<br>1,5</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #3b82f6; color: white; font-weight: 700;'>BAIXO<br>1,0</td>
+                            <td style='padding: 1rem; border: 1px solid #e5e7eb; text-align: center; background: #3b82f6; color: white; font-weight: 700;'>BAIXO<br>0,5</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    st.markdown("""
-        <div style='background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%);
-                    padding: clamp(1.5rem, 3vw, 2rem);
-                    border-radius: clamp(10px, 2vw, 14px);
-                    border-left: 4px solid #3b82f6;
-                    margin-bottom: 2rem;
-                    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.08);'>
-            <div style='display: flex; align-items: flex-start; gap: clamp(0.8rem, 2vw, 1.2rem); flex-wrap: wrap;'>
-                <div style='min-width: 48px; height: 48px;
-                            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-                            border-radius: 10px;
-                            display: flex; align-items: center; justify-content: center;
-                            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);'>
-                    <svg width="24" height="24" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
-                        <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                </div>
-                <div style='flex: 1; min-width: 250px;'>
-                    <h4 style='margin: 0 0 0.8rem 0; color: #1e40af; font-size: clamp(1rem, 2.2vw, 1.1rem); font-weight: 700;'>
-                        Como Interpretar a Matriz
-                    </h4>
-                    <div style='color: #1e3a8a; font-size: clamp(0.85rem, 2vw, 0.95rem); line-height: 1.7;'>
-                        <strong>Eixo Horizontal (Probabilidade):</strong> Qual a chance deste risco se concretizar? 0% a 100%<br>
-                        <strong>Eixo Vertical (Severidade):</strong> Qual o impacto se ele acontecer? Score de 0 a 5<br><br>
-                        <strong>Quadrante Superior Direito (vermelho):</strong> Alta probabilidade + Alto impacto = <strong>Ação Imediata</strong><br>
-                        <strong>Quadrante Intermediário (laranja):</strong> Risco moderado = <strong>Curto Prazo</strong><br>
-                        <strong>Quadrante Inferior Esquerdo (verde):</strong> Baixa probabilidade + Baixo impacto = <strong>Monitoramento</strong>
-                    </div>
-                </div>
+            <div style='margin-top: 1.5rem; padding: 1rem; background: rgba(255, 255, 255, 0.7); border-radius: 8px; border-left: 3px solid #c4a672;'>
+                <p style='margin: 0; color: #6b5847; font-size: 0.9rem; line-height: 1.6;'>
+                    <strong>Probabilidade:</strong> Probabilidade de ocorrência do possível dano e/ou lesão<br>
+                    <strong>Severidade:</strong> Consequências do dano e/ou lesão criados, ou seja, a amplitude da gravidade deste dano
+                </p>
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -2994,132 +3057,97 @@ elif pagina == "Matriz de Risco":
                     margin-bottom: 2rem;'>
             <div style='margin-bottom: 1.5rem;'>
                 <h3 style='margin: 0; color: #5a4a3a; font-size: clamp(1.2rem, 3vw, 1.4rem); font-weight: 700;'>
-                    Matriz: Probabilidade × Severidade
+                    Distribuição dos Riscos na Matriz
                 </h3>
                 <p style='margin: 0.4rem 0 0 0; color: #8b7663; font-size: clamp(0.8rem, 2vw, 0.9rem);'>
-                    Posicionamento estratégico dos fatores de risco - Cada ponto representa um fator psicossocial
+                    Visualização dos fatores psicossociais por nível de criticidade
                 </p>
             </div>
     """, unsafe_allow_html=True)
     
-    filtered_matriz['prob_norm'] = filtered_matriz['probabilidade'] * 10
+    filtered_matriz2['prob_norm'] = filtered_matriz2['probabilidade'] * 10
+    
+    matriz_height = calculate_responsive_height(len(filtered_matriz2), min_height=600, item_height=25, max_height=850)
+    
+    fig7 = go.Figure()
 
-    matriz_height = calculate_responsive_height(len(filtered_matriz), min_height=600, item_height=25, max_height=850)
-
-    fig6 = go.Figure()
-
-    fig6.add_shape(type="rect",
-        x0=7, y0=3.5, x1=10, y1=5,
-        fillcolor="rgba(220, 38, 38, 0.1)",
-        line=dict(width=0),
-        layer="below"
-    )
-
-    fig6.add_shape(type="rect",
-        x0=5, y0=3, x1=7, y1=5,
-        fillcolor="rgba(245, 158, 11, 0.08)",
-        line=dict(width=0),
-        layer="below"
-    )
-    fig6.add_shape(type="rect",
-        x0=7, y0=3, x1=10, y1=3.5,
-        fillcolor="rgba(245, 158, 11, 0.08)",
-        line=dict(width=0),
-        layer="below"
-    )
-
-    fig6.add_shape(type="rect",
-        x0=5, y0=0, x1=7, y1=3,
-        fillcolor="rgba(245, 158, 11, 0.04)",
-        line=dict(width=0),
-        layer="below"
-    )
-    fig6.add_shape(type="rect",
-        x0=0, y0=3, x1=5, y1=5,
-        fillcolor="rgba(245, 158, 11, 0.04)",
-        line=dict(width=0),
-        layer="below"
-    )
-
-    fig6.add_shape(type="rect",
-        x0=0, y0=0, x1=5, y1=3,
-        fillcolor="rgba(16, 185, 129, 0.06)",
-        line=dict(width=0),
-        layer="below"
-    )
-
-    color_map = {
-        'Ação Imediata': '#dc2626',
-        'Curto Prazo': '#f59e0b',
-        'Monitoramento': '#10b981'
+    fig7.add_shape(type="rect", x0=7.5, y0=4.5, x1=10, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=5, y0=4.5, x1=7.5, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=2.5, y0=4.5, x1=5, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=0, y0=4.5, x1=2.5, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=7.5, y0=3, x1=10, y1=4.5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
+    
+    fig7.add_shape(type="rect", x0=5, y0=3, x1=7.5, y1=4.5, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=2.5, y0=3, x1=5, y1=4.5, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=7.5, y0=2, x1=10, y1=3, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=5, y0=2, x1=7.5, y1=3, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
+    
+    fig7.add_shape(type="rect", x0=0, y0=3, x1=2.5, y1=4.5, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=2.5, y0=2, x1=5, y1=3, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=7.5, y0=1, x1=10, y1=2, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=5, y0=1, x1=7.5, y1=2, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
+    
+    fig7.add_shape(type="rect", x0=0, y0=2, x1=2.5, y1=3, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=2.5, y0=1, x1=5, y1=2, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=0, y0=1, x1=2.5, y1=2, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=7.5, y0=0, x1=10, y1=1, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=5, y0=0, x1=7.5, y1=1, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=2.5, y0=0, x1=5, y1=1, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=0, y0=0, x1=2.5, y1=1, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    
+    color_map_class = {
+        'CRÍTICO': '#dc2626',
+        'ALTO': '#f59e0b',
+        'MÉDIO': '#eab308',
+        'BAIXO': '#3b82f6'
     }
-
-    for zona in ['Monitoramento', 'Curto Prazo', 'Ação Imediata']:  
-        df_zona = filtered_matriz[filtered_matriz['zona'] == zona]
-        if len(df_zona) > 0:
-            fig6.add_trace(go.Scatter(
-                x=df_zona['prob_norm'],
-                y=df_zona['severidade'],
-                mode='markers+text' if show_labels_matriz else 'markers',
-                name=zona,
+    
+    for classificacao in ['BAIXO', 'MÉDIO', 'ALTO', 'CRÍTICO']:
+        df_class = filtered_matriz2[filtered_matriz2['classificacao'] == classificacao]
+        if len(df_class) > 0:
+            fig7.add_trace(go.Scatter(
+                x=df_class['prob_norm'],
+                y=df_class['severidade'],
+                mode='markers+text' if show_labels_matriz2 else 'markers',
+                name=classificacao,
                 marker=dict(
                     size=24,
-                    color=color_map[zona],
+                    color=color_map_class[classificacao],
                     line=dict(width=3, color='white'),
                     opacity=0.9
                 ),
-                text=df_zona['subescala'].str[:20] if show_labels_matriz else '',
+                text=df_class['subescala'].str[:20] if show_labels_matriz2 else '',
                 textposition='top center',
                 textfont=dict(size=11, color='#1e293b', family='Arial', weight='bold'),
-                hovertemplate='<b>%{text}</b><br>Probabilidade: %{x:.1f}/10 (%{customdata[0]:.0%})<br>Severidade: %{y:.2f}/5<br><b>Zona: ' + zona + '</b><extra></extra>',
-                customdata=df_zona[['probabilidade']].values
+                hovertemplate='<b>%{text}</b><br>Probabilidade: %{x:.1f}/10 (%{customdata[0]:.0%})<br>Severidade: %{y:.2f}/5<br>Pontuação: %{customdata[1]:.1f}<br><b>Risco: ' + classificacao + '</b><extra></extra>',
+                customdata=df_class[['probabilidade', 'pontuacao']].values
             ))
-
-    fig6.add_hline(y=3.5, line_dash="dash", line_color="#dc2626", line_width=2.5, 
-                annotation_text="Severidade Alta", annotation_position="right",
-                annotation_font=dict(size=13, color='#dc2626', family='Arial', weight='bold'))
-    fig6.add_hline(y=3, line_dash="dash", line_color="#f59e0b", line_width=2,
-                annotation_font=dict(size=12, color='#f59e0b', family='Arial'))
-    fig6.add_vline(x=7, line_dash="dash", line_color="#dc2626", line_width=2.5,
-                annotation_text="Prob. Alta", annotation_position="top",
-                annotation_font=dict(size=13, color='#dc2626', family='Arial', weight='bold'))
-    fig6.add_vline(x=5, line_dash="dash", line_color="#f59e0b", line_width=2,
-                annotation_font=dict(size=12, color='#f59e0b', family='Arial'))
-
-    fig6.add_annotation(x=8.5, y=4.7, text="<b>ZONA CRÍTICA</b>",
-                    showarrow=False,
-                    font=dict(size=15, color='#dc2626', family='Arial', weight='bold'),
-                    bgcolor='rgba(254, 226, 226, 0.9)',
-                    bordercolor='#dc2626',
-                    borderwidth=2,
-                    borderpad=8)
-
-    fig6.add_annotation(x=8.5, y=3.2, text="<b>ZONA ALTA</b>",
-                    showarrow=False,
-                    font=dict(size=13, color='#f59e0b', family='Arial', weight='bold'),
-                    bgcolor='rgba(254, 243, 199, 0.9)',
-                    bordercolor='#f59e0b',
-                    borderwidth=2,
-                    borderpad=6)
-
-    fig6.add_annotation(x=2.5, y=4.5, text="<b>MÉDIA PRIORIDADE</b>",
-                    showarrow=False,
-                    font=dict(size=12, color='#8b7663', family='Arial', weight='bold'),
-                    bgcolor='rgba(255, 255, 255, 0.8)',
-                    bordercolor='#c4a672',
-                    borderwidth=1,
-                    borderpad=5)
-
-    fig6.add_annotation(x=2.5, y=1.5, text="<b>MONITORAMENTO</b>",
-                    showarrow=False,
-                    font=dict(size=13, color='#10b981', family='Arial', weight='bold'),
-                    bgcolor='rgba(209, 250, 229, 0.9)',
-                    bordercolor='#10b981',
-                    borderwidth=2,
-                    borderpad=6)
-
+    
+    fig7.add_hline(y=4.5, line_dash="dash", line_color="#dc2626", line_width=2.5, 
+                annotation_text="Severidade Crítica", annotation_position="right",
+                annotation_font=dict(size=12, color='#dc2626', family='Arial', weight='bold'))
+    fig7.add_hline(y=3, line_dash="dash", line_color="#f59e0b", line_width=2,
+                annotation_text="Severidade Grave", annotation_position="right",
+                annotation_font=dict(size=11, color='#f59e0b', family='Arial'))
+    fig7.add_hline(y=2, line_dash="dash", line_color="#eab308", line_width=1.5,
+                annotation_text="Severidade Moderada", annotation_position="right",
+                annotation_font=dict(size=10, color='#eab308', family='Arial'))
+    fig7.add_hline(y=1, line_dash="dash", line_color="#3b82f6", line_width=1.5,
+                annotation_text="Severidade Leve", annotation_position="right",
+                annotation_font=dict(size=10, color='#3b82f6', family='Arial'))
+    
+    fig7.add_vline(x=7.5, line_dash="dash", line_color="#dc2626", line_width=2.5,
+                annotation_text="Prob. Permanente", annotation_position="top",
+                annotation_font=dict(size=12, color='#dc2626', family='Arial', weight='bold'))
+    fig7.add_vline(x=5, line_dash="dash", line_color="#f59e0b", line_width=2,
+                annotation_text="Prob. Intermitente", annotation_position="top",
+                annotation_font=dict(size=11, color='#f59e0b', family='Arial'))
+    fig7.add_vline(x=2.5, line_dash="dash", line_color="#eab308", line_width=1.5,
+                annotation_text="Prob. Esporádica", annotation_position="top",
+                annotation_font=dict(size=10, color='#eab308', family='Arial'))
+    
     layout_config = create_responsive_layout_config()
-    fig6.update_layout(
+    fig7.update_layout(
         **layout_config,
         height=matriz_height,
         xaxis=dict(
@@ -3129,11 +3157,10 @@ elif pagina == "Matriz de Risco":
             linewidth=2,
             linecolor='rgba(107, 88, 71, 0.3)',
             title=dict(
-                text='<b>Probabilidade de Ocorrência</b> (0 = Improvável → 10 = Muito Provável)',
+                text='<b>Probabilidade de Ocorrência</b> (0 = Eventual → 10 = Permanente)',
                 font=dict(size=14, color='#5a4a3a', family='Arial', weight='bold')
             ),
             tickfont=dict(size=13, color='#6b5847', family='Arial', weight='bold'),
-            ticksuffix='',
             dtick=1
         ),
         yaxis=dict(
@@ -3143,11 +3170,11 @@ elif pagina == "Matriz de Risco":
             linewidth=2,
             linecolor='rgba(107, 88, 71, 0.3)',
             title=dict(
-                text='<b>Severidade do Impacto</b> (0 = Baixo → 5 = Muito Alto)',
+                text='<b>Severidade do Impacto</b> (0 = Leve → 5 = Catastrófica)',
                 font=dict(size=14, color='#5a4a3a', family='Arial', weight='bold')
             ),
             tickfont=dict(size=13, color='#6b5847', family='Arial', weight='bold'),
-            dtick=0.5
+            dtick=1
         ),
         showlegend=True,
         legend=dict(
@@ -3162,22 +3189,22 @@ elif pagina == "Matriz de Risco":
             font=dict(size=13, family='Arial', color='#5a4a3a', weight='bold')
         )
     )
-
-    st.plotly_chart(fig6, use_container_width=True, config={'responsive': True, 'displayModeBar': False})
+    
+    st.plotly_chart(fig7, use_container_width=True, config={'responsive': True, 'displayModeBar': False})
     st.markdown("</div>", unsafe_allow_html=True)
     
     st.markdown("""
         <div style='margin: 2rem 0 1rem 0;'>
             <h3 style='color: #5a4a3a; font-size: clamp(1.1rem, 2.5vw, 1.3rem); font-weight: 700;'>
-                Guia de Priorização por Zona
+                Guia de Ação por Nível de Risco
             </h3>
             <p style='color: #8b7663; font-size: clamp(0.8rem, 2vw, 0.9rem); margin: 0.4rem 0 0 0;'>
-                Critérios de alocação de recursos e definição de prazos
+                Estratégias recomendadas conforme pontuação de risco
             </p>
         </div>
     """, unsafe_allow_html=True)
     
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
     
     with col1:
         st.markdown("""
@@ -3198,21 +3225,21 @@ elif pagina == "Matriz de Risco":
                         </svg>
                     </div>
                     <h4 style='margin: 0; color: #991b1b; font-size: clamp(1rem, 2.2vw, 1.1rem); font-weight: 700;'>
-                        Ação Imediata
+                        CRÍTICO
                     </h4>
                 </div>
                 <div style='color: #7f1d1d; font-size: clamp(0.85rem, 2vw, 0.9rem); line-height: 1.7;'>
                     <div style='margin-bottom: 0.8rem;'>
-                        <strong>Prazo:</strong> 30-60 dias
+                        <strong>Pontuação:</strong> ≥ 5.0
                     </div>
                     <div style='margin-bottom: 0.8rem;'>
-                        <strong>Recursos:</strong> Orçamento prioritário
+                        <strong>Ação:</strong> Imediata
                     </div>
                     <div style='margin-bottom: 0.8rem;'>
-                        <strong>Exemplo:</strong> Programa emergencial de suporte psicológico
+                        <strong>Prazo:</strong> 30 dias
                     </div>
                     <div style='background: rgba(220, 38, 38, 0.08); padding: 0.6rem; border-radius: 6px; margin-top: 1rem;'>
-                        <strong>Critério:</strong> Prob ≥70% E Sev ≥3.5
+                        Intervenção urgente necessária
                     </div>
                 </div>
             </div>
@@ -3233,25 +3260,25 @@ elif pagina == "Matriz de Risco":
                                 display: flex; align-items: center; justify-content: center;
                                 box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);'>
                         <svg width="20" height="20" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                         </svg>
                     </div>
                     <h4 style='margin: 0; color: #92400e; font-size: clamp(1rem, 2.2vw, 1.1rem); font-weight: 700;'>
-                        Curto Prazo
+                        ALTO
                     </h4>
                 </div>
                 <div style='color: #78350f; font-size: clamp(0.85rem, 2vw, 0.9rem); line-height: 1.7;'>
                     <div style='margin-bottom: 0.8rem;'>
-                        <strong>Prazo:</strong> 3-6 meses
+                        <strong>Pontuação:</strong> 3.0 - 4.9
                     </div>
                     <div style='margin-bottom: 0.8rem;'>
-                        <strong>Recursos:</strong> Moderados
+                        <strong>Ação:</strong> Prioritária
                     </div>
                     <div style='margin-bottom: 0.8rem;'>
-                        <strong>Exemplo:</strong> Redesenho de processos críticos
+                        <strong>Prazo:</strong> 60-90 dias
                     </div>
                     <div style='background: rgba(245, 158, 11, 0.08); padding: 0.6rem; border-radius: 6px; margin-top: 1rem;'>
-                        <strong>Critério:</strong> Prob ≥50% OU Sev ≥3.0
+                        Plano de ação estruturado
                     </div>
                 </div>
             </div>
@@ -3259,100 +3286,79 @@ elif pagina == "Matriz de Risco":
     
     with col3:
         st.markdown("""
-            <div style='background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.05) 100%);
+            <div style='background: linear-gradient(135deg, rgba(234, 179, 8, 0.08) 0%, rgba(202, 138, 4, 0.05) 100%);
                         padding: clamp(1.2rem, 3vw, 1.8rem);
                         border-radius: clamp(10px, 2vw, 14px);
-                        border: 2px solid rgba(16, 185, 129, 0.2);
-                        border-left: 5px solid #10b981;
+                        border: 2px solid rgba(234, 179, 8, 0.2);
+                        border-left: 5px solid #eab308;
                         height: 100%;'>
                 <div style='display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;'>
                     <div style='width: 40px; height: 40px;
-                                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                                background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
                                 border-radius: 10px;
                                 display: flex; align-items: center; justify-content: center;
-                                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);'>
+                                box-shadow: 0 4px 12px rgba(234, 179, 8, 0.3);'>
                         <svg width="20" height="20" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            <path d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
-                    <h4 style='margin: 0; color: #065f46; font-size: clamp(1rem, 2.2vw, 1.1rem); font-weight: 700;'>
-                        Monitoramento
+                    <h4 style='margin: 0; color: #713f12; font-size: clamp(1rem, 2.2vw, 1.1rem); font-weight: 700;'>
+                        MÉDIO
                     </h4>
                 </div>
-                <div style='color: #064e3b; font-size: clamp(0.85rem, 2vw, 0.9rem); line-height: 1.7;'>
+                <div style='color: #854d0e; font-size: clamp(0.85rem, 2vw, 0.9rem); line-height: 1.7;'>
                     <div style='margin-bottom: 0.8rem;'>
-                        <strong>Prazo:</strong> Contínuo
+                        <strong>Pontuação:</strong> 1.5 - 2.9
                     </div>
                     <div style='margin-bottom: 0.8rem;'>
-                        <strong>Recursos:</strong> Básicos
+                        <strong>Ação:</strong> Programada
                     </div>
                     <div style='margin-bottom: 0.8rem;'>
-                        <strong>Exemplo:</strong> Avaliações periódicas trimestrais
+                        <strong>Prazo:</strong> 3-6 meses
                     </div>
-                    <div style='background: rgba(16, 185, 129, 0.08); padding: 0.6rem; border-radius: 6px; margin-top: 1rem;'>
-                        <strong>Critério:</strong> Demais casos
+                    <div style='background: rgba(234, 179, 8, 0.08); padding: 0.6rem; border-radius: 6px; margin-top: 1rem;'>
+                        Monitoramento ativo
                     </div>
                 </div>
             </div>
         """, unsafe_allow_html=True)
     
-    st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
-    
-    col_prox1, col_prox2 = st.columns(2)
-    
-    with col_prox1:
+    with col4:
         st.markdown("""
-            <div style='background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(219, 234, 254, 0.8) 100%);
-                        padding: clamp(1rem, 3vw, 1.5rem);
+            <div style='background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(37, 99, 235, 0.05) 100%);
+                        padding: clamp(1.2rem, 3vw, 1.8rem);
                         border-radius: clamp(10px, 2vw, 14px);
-                        border: 2px solid rgba(59, 130, 246, 0.25);
-                        border-left: 4px solid #3b82f6;
-                        box-shadow: 0 3px 12px rgba(59, 130, 246, 0.1);'>
-                <div style='display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;'>
-                    <div style='width: 42px; height: 42px;
+                        border: 2px solid rgba(59, 130, 246, 0.2);
+                        border-left: 5px solid #3b82f6;
+                        height: 100%;'>
+                <div style='display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;'>
+                    <div style='width: 40px; height: 40px;
                                 background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
                                 border-radius: 10px;
                                 display: flex; align-items: center; justify-content: center;
                                 box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);'>
                         <svg width="20" height="20" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path d="M9 5l7 7-7 7"/>
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
-                    <h4 style='margin: 0; color: #1e40af; font-size: clamp(0.95rem, 2vw, 1.05rem); font-weight: 700;'>
-                        Próximo Passo
+                    <h4 style='margin: 0; color: #1e40af; font-size: clamp(1rem, 2.2vw, 1.1rem); font-weight: 700;'>
+                        BAIXO
                     </h4>
                 </div>
-                <p style='margin: 0; color: #1e3a8a; font-size: clamp(0.85rem, 2vw, 0.95rem); line-height: 1.6;'>
-                    Acesse <strong>Detalhamento & Ações</strong> para planos de ação específicos
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-    
-    with col_prox2:
-        st.markdown("""
-            <div style='background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(209, 250, 229, 0.8) 100%);
-                        padding: clamp(1rem, 3vw, 1.5rem);
-                        border-radius: clamp(10px, 2vw, 14px);
-                        border: 2px solid rgba(16, 185, 129, 0.25);
-                        border-left: 4px solid #10b981;
-                        box-shadow: 0 3px 12px rgba(16, 185, 129, 0.1);'>
-                <div style='display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;'>
-                    <div style='width: 42px; height: 42px;
-                                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-                                border-radius: 10px;
-                                display: flex; align-items: center; justify-content: center;
-                                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);'>
-                        <svg width="20" height="20" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
-                            <path d="M5 13l4 4L19 7"/>
-                        </svg>
+                <div style='color: #1e3a8a; font-size: clamp(0.85rem, 2vw, 0.9rem); line-height: 1.7;'>
+                    <div style='margin-bottom: 0.8rem;'>
+                        <strong>Pontuação:</strong> < 1.5
                     </div>
-                    <h4 style='margin: 0; color: #065f46; font-size: clamp(0.95rem, 2vw, 1.05rem); font-weight: 700;'>
-                        Conformidade NR-01
-                    </h4>
+                    <div style='margin-bottom: 0.8rem;'>
+                        <strong>Ação:</strong> Observação
+                    </div>
+                    <div style='margin-bottom: 0.8rem;'>
+                        <strong>Prazo:</strong> Contínuo
+                    </div>
+                    <div style='background: rgba(59, 130, 246, 0.08); padding: 0.6rem; border-radius: 6px; margin-top: 1rem;'>
+                        Manutenção preventiva
+                    </div>
                 </div>
-                <p style='margin: 0; color: #064e3b; font-size: clamp(0.85rem, 2vw, 0.95rem); line-height: 1.6;'>
-                    Matriz atende <strong>avaliação</strong> e <strong>priorização</strong> de riscos
-                </p>
             </div>
         """, unsafe_allow_html=True)
 
