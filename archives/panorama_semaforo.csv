@@ -1,0 +1,88 @@
+,subescala,classe_risco,qtd
+0,Apoio social colegas,alto,87
+1,Apoio social colegas,baixo,22
+2,Apoio social colegas,medio,78
+3,Apoio social superiores,alto,85
+4,Apoio social superiores,baixo,32
+5,Apoio social superiores,medio,70
+6,Autoeficácia,alto,122
+7,Autoeficácia,baixo,10
+8,Autoeficácia,medio,55
+9,Burnout,alto,41
+10,Burnout,baixo,43
+11,Burnout,medio,103
+12,Comportamentos ofensivos,alto,1
+13,Comportamentos ofensivos,baixo,183
+14,Comportamentos ofensivos,medio,3
+15,Compromisso,alto,48
+16,Compromisso,baixo,42
+17,Compromisso,medio,97
+18,Comunidade social,alto,131
+19,Comunidade social,baixo,13
+20,Comunidade social,medio,43
+21,Confiança horizontal,alto,22
+22,Confiança horizontal,baixo,37
+23,Confiança horizontal,medio,128
+24,Confiança vertical,alto,79
+25,Confiança vertical,baixo,11
+26,Confiança vertical,medio,97
+27,Conflito trabalho-família,alto,57
+28,Conflito trabalho-família,baixo,70
+29,Conflito trabalho-família,medio,60
+30,Conflitos de papéis,alto,30
+31,Conflitos de papéis,baixo,49
+32,Conflitos de papéis,medio,108
+33,Exigências cognitivas,alto,120
+34,Exigências cognitivas,baixo,8
+35,Exigências cognitivas,medio,59
+36,Exigências emocionais,alto,82
+37,Exigências emocionais,baixo,57
+38,Exigências emocionais,medio,48
+39,Exigências quantitativas,alto,44
+40,Exigências quantitativas,baixo,39
+41,Exigências quantitativas,medio,104
+42,Influência no trabalho,alto,27
+43,Influência no trabalho,baixo,71
+44,Influência no trabalho,medio,89
+45,Insegurança laboral,alto,76
+46,Insegurança laboral,baixo,74
+47,Insegurança laboral,medio,37
+48,Justiça e respeito,alto,92
+49,Justiça e respeito,baixo,28
+50,Justiça e respeito,medio,67
+51,Possibilidades de desenvolvimento,alto,132
+52,Possibilidades de desenvolvimento,baixo,11
+53,Possibilidades de desenvolvimento,medio,44
+54,Previsibilidade,alto,64
+55,Previsibilidade,baixo,39
+56,Previsibilidade,medio,84
+57,Problemas de sono,alto,33
+58,Problemas de sono,baixo,96
+59,Problemas de sono,medio,58
+60,Qualidade da liderança,alto,88
+61,Qualidade da liderança,baixo,26
+62,Qualidade da liderança,medio,73
+63,Recompensas,alto,135
+64,Recompensas,baixo,16
+65,Recompensas,medio,36
+66,Ritmo de trabalho,alto,73
+67,Ritmo de trabalho,baixo,42
+68,Ritmo de trabalho,medio,72
+69,Satisfação,alto,66
+70,Satisfação,baixo,28
+71,Satisfação,medio,93
+72,Saúde geral,alto,38
+73,Saúde geral,baixo,78
+74,Saúde geral,medio,71
+75,Significado do trabalho,alto,136
+76,Significado do trabalho,baixo,12
+77,Significado do trabalho,medio,39
+78,Sintomas depressivos,alto,26
+79,Sintomas depressivos,baixo,93
+80,Sintomas depressivos,medio,68
+81,Stress,alto,39
+82,Stress,baixo,69
+83,Stress,medio,79
+84,Transparência do papel,alto,150
+85,Transparência do papel,baixo,9
+86,Transparência do papel,medio,28

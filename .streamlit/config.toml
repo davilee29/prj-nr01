@@ -1,0 +1,40 @@
+[global]
+dataFrameSerialization = "legacy"
+developmentMode = false
+showWarningOnDirectExecution = false
+
+[server]
+port = 8501
+enableCORS = false
+enableXsrfProtection = false
+maxUploadSize = 200
+enableWebsocketCompression = true
+headless = true
+runOnSave = false
+fileWatcherType = "none"
+
+[browser]
+gatherUsageStats = false
+serverAddress = "localhost"
+serverPort = 8501
+
+[runner]
+magicEnabled = false
+fastReruns = true
+enforceSerializableSessionState = false
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = true
+
+[theme]
+base = "light"
+primaryColor = "#FF4B4B"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#262730"
+font = "sans serif"
+
+[logger]
+level = "error"
+messageFormat = "%(asctime)s %(message)s"

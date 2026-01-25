@@ -1,0 +1,233 @@
+,setor,subescala,media,qtd
+0,Engenharia / Qualidade,Apoio social colegas,3.5185185185185186,18
+1,Engenharia / Qualidade,Apoio social superiores,3.7777777777777777,18
+2,Engenharia / Qualidade,Autoeficácia,4.166666666666667,18
+3,Engenharia / Qualidade,Burnout,2.8055555555555554,18
+4,Engenharia / Qualidade,Comportamentos ofensivos,1.0555555555555556,18
+5,Engenharia / Qualidade,Compromisso,3.4444444444444446,18
+6,Engenharia / Qualidade,Comunidade social,4.277777777777778,18
+7,Engenharia / Qualidade,Confiança horizontal,2.685185185185185,18
+8,Engenharia / Qualidade,Confiança vertical,3.574074074074074,18
+9,Engenharia / Qualidade,Conflito trabalho-família,2.2962962962962963,18
+10,Engenharia / Qualidade,Conflitos de papéis,2.7222222222222223,18
+11,Engenharia / Qualidade,Exigências cognitivas,3.8518518518518516,18
+12,Engenharia / Qualidade,Exigências emocionais,2.888888888888889,18
+13,Engenharia / Qualidade,Exigências quantitativas,2.7037037037037037,18
+14,Engenharia / Qualidade,Influência no trabalho,2.986111111111111,18
+15,Engenharia / Qualidade,Insegurança laboral,2.9444444444444446,18
+16,Engenharia / Qualidade,Justiça e respeito,3.796296296296296,18
+17,Engenharia / Qualidade,Possibilidades de desenvolvimento,4.12962962962963,18
+18,Engenharia / Qualidade,Previsibilidade,3.75,18
+19,Engenharia / Qualidade,Problemas de sono,2.2777777777777777,18
+20,Engenharia / Qualidade,Qualidade da liderança,4.083333333333333,18
+21,Engenharia / Qualidade,Recompensas,4.333333333333333,18
+22,Engenharia / Qualidade,Ritmo de trabalho,2.611111111111111,18
+23,Engenharia / Qualidade,Satisfação,3.75,18
+24,Engenharia / Qualidade,Saúde geral,2.4444444444444446,18
+25,Engenharia / Qualidade,Significado do trabalho,4.2592592592592595,18
+26,Engenharia / Qualidade,Sintomas depressivos,1.8611111111111112,18
+27,Engenharia / Qualidade,Stress,2.611111111111111,18
+28,Engenharia / Qualidade,Transparência do papel,4.407407407407407,18
+29,Estamparia,Apoio social colegas,3.236111111111111,24
+30,Estamparia,Apoio social superiores,3.027777777777778,24
+31,Estamparia,Autoeficácia,3.7083333333333335,24
+32,Estamparia,Burnout,3.0833333333333335,24
+33,Estamparia,Comportamentos ofensivos,1.1666666666666667,24
+34,Estamparia,Compromisso,2.9791666666666665,24
+35,Estamparia,Comunidade social,3.930555555555556,24
+36,Estamparia,Confiança horizontal,2.5,24
+37,Estamparia,Confiança vertical,3.388888888888889,24
+38,Estamparia,Conflito trabalho-família,3.097222222222222,24
+39,Estamparia,Conflitos de papéis,2.763888888888889,24
+40,Estamparia,Exigências cognitivas,3.5416666666666665,24
+41,Estamparia,Exigências emocionais,3.0,24
+42,Estamparia,Exigências quantitativas,2.75,24
+43,Estamparia,Influência no trabalho,2.4583333333333335,24
+44,Estamparia,Insegurança laboral,3.2083333333333335,24
+45,Estamparia,Justiça e respeito,3.4166666666666665,24
+46,Estamparia,Possibilidades de desenvolvimento,3.611111111111111,24
+47,Estamparia,Previsibilidade,3.3333333333333335,24
+48,Estamparia,Problemas de sono,2.4375,24
+49,Estamparia,Qualidade da liderança,3.34375,24
+50,Estamparia,Recompensas,3.861111111111111,24
+51,Estamparia,Ritmo de trabalho,3.0,24
+52,Estamparia,Satisfação,3.4375,24
+53,Estamparia,Saúde geral,2.375,24
+54,Estamparia,Significado do trabalho,3.777777777777778,24
+55,Estamparia,Sintomas depressivos,2.625,24
+56,Estamparia,Stress,2.7916666666666665,24
+57,Estamparia,Transparência do papel,4.180555555555555,24
+58,Logística,Apoio social colegas,3.1,10
+59,Logística,Apoio social superiores,2.9,10
+60,Logística,Autoeficácia,4.0,10
+61,Logística,Burnout,3.9,10
+62,Logística,Comportamentos ofensivos,1.3,10
+63,Logística,Compromisso,2.9,10
+64,Logística,Comunidade social,3.6666666666666665,10
+65,Logística,Confiança horizontal,2.7666666666666666,10
+66,Logística,Confiança vertical,3.3333333333333335,10
+67,Logística,Conflito trabalho-família,3.3333333333333335,10
+68,Logística,Conflitos de papéis,3.4,10
+69,Logística,Exigências cognitivas,4.4,10
+70,Logística,Exigências emocionais,4.1,10
+71,Logística,Exigências quantitativas,3.4333333333333336,10
+72,Logística,Influência no trabalho,2.9,10
+73,Logística,Insegurança laboral,2.8,10
+74,Logística,Justiça e respeito,3.033333333333333,10
+75,Logística,Possibilidades de desenvolvimento,3.7,10
+76,Logística,Previsibilidade,2.5,10
+77,Logística,Problemas de sono,2.8,10
+78,Logística,Qualidade da liderança,2.975,10
+79,Logística,Recompensas,3.8,10
+80,Logística,Ritmo de trabalho,4.0,10
+81,Logística,Satisfação,2.625,10
+82,Logística,Saúde geral,3.1,10
+83,Logística,Significado do trabalho,3.7333333333333334,10
+84,Logística,Sintomas depressivos,3.05,10
+85,Logística,Stress,4.05,10
+86,Logística,Transparência do papel,3.9333333333333336,10
+87,Manutenção,Apoio social colegas,3.8666666666666667,15
+88,Manutenção,Apoio social superiores,3.6666666666666665,15
+89,Manutenção,Autoeficácia,4.033333333333333,15
+90,Manutenção,Burnout,2.566666666666667,15
+91,Manutenção,Comportamentos ofensivos,1.0833333333333333,15
+92,Manutenção,Compromisso,3.2666666666666666,15
+93,Manutenção,Comunidade social,4.511111111111111,15
+94,Manutenção,Confiança horizontal,2.711111111111111,15
+95,Manutenção,Confiança vertical,3.2666666666666666,15
+96,Manutenção,Conflito trabalho-família,2.9777777777777774,15
+97,Manutenção,Conflitos de papéis,2.711111111111111,15
+98,Manutenção,Exigências cognitivas,3.911111111111111,15
+99,Manutenção,Exigências emocionais,3.3333333333333335,15
+100,Manutenção,Exigências quantitativas,3.0222222222222226,15
+101,Manutenção,Influência no trabalho,2.75,15
+102,Manutenção,Insegurança laboral,2.533333333333333,15
+103,Manutenção,Justiça e respeito,3.511111111111111,15
+104,Manutenção,Possibilidades de desenvolvimento,4.222222222222222,15
+105,Manutenção,Previsibilidade,3.0,15
+106,Manutenção,Problemas de sono,2.033333333333333,15
+107,Manutenção,Qualidade da liderança,3.5166666666666666,15
+108,Manutenção,Recompensas,3.911111111111111,15
+109,Manutenção,Ritmo de trabalho,3.7333333333333334,15
+110,Manutenção,Satisfação,3.3333333333333335,15
+111,Manutenção,Saúde geral,2.066666666666667,15
+112,Manutenção,Significado do trabalho,4.022222222222222,15
+113,Manutenção,Sintomas depressivos,1.8666666666666667,15
+114,Manutenção,Stress,2.2333333333333334,15
+115,Manutenção,Transparência do papel,4.044444444444444,15
+116,Molde/ Ferramental/Calderaria,Apoio social colegas,3.351851851851852,18
+117,Molde/ Ferramental/Calderaria,Apoio social superiores,3.148148148148148,18
+118,Molde/ Ferramental/Calderaria,Autoeficácia,3.4166666666666665,18
+119,Molde/ Ferramental/Calderaria,Burnout,2.5,18
+120,Molde/ Ferramental/Calderaria,Comportamentos ofensivos,1.2361111111111112,18
+121,Molde/ Ferramental/Calderaria,Compromisso,2.4722222222222223,18
+122,Molde/ Ferramental/Calderaria,Comunidade social,3.4259259259259256,18
+123,Molde/ Ferramental/Calderaria,Confiança horizontal,2.259259259259259,18
+124,Molde/ Ferramental/Calderaria,Confiança vertical,2.9444444444444446,18
+125,Molde/ Ferramental/Calderaria,Conflito trabalho-família,2.5925925925925926,18
+126,Molde/ Ferramental/Calderaria,Conflitos de papéis,2.5185185185185186,18
+127,Molde/ Ferramental/Calderaria,Exigências cognitivas,3.4444444444444446,18
+128,Molde/ Ferramental/Calderaria,Exigências emocionais,3.0,18
+129,Molde/ Ferramental/Calderaria,Exigências quantitativas,2.648148148148148,18
+130,Molde/ Ferramental/Calderaria,Influência no trabalho,2.361111111111111,18
+131,Molde/ Ferramental/Calderaria,Insegurança laboral,2.9444444444444446,18
+132,Molde/ Ferramental/Calderaria,Justiça e respeito,3.240740740740741,18
+133,Molde/ Ferramental/Calderaria,Possibilidades de desenvolvimento,3.7222222222222223,18
+134,Molde/ Ferramental/Calderaria,Previsibilidade,3.0555555555555554,18
+135,Molde/ Ferramental/Calderaria,Problemas de sono,2.0555555555555554,18
+136,Molde/ Ferramental/Calderaria,Qualidade da liderança,3.1666666666666665,18
+137,Molde/ Ferramental/Calderaria,Recompensas,3.407407407407407,18
+138,Molde/ Ferramental/Calderaria,Ritmo de trabalho,2.4444444444444446,18
+139,Molde/ Ferramental/Calderaria,Satisfação,2.875,18
+140,Molde/ Ferramental/Calderaria,Saúde geral,2.2777777777777777,18
+141,Molde/ Ferramental/Calderaria,Significado do trabalho,3.3333333333333335,18
+142,Molde/ Ferramental/Calderaria,Sintomas depressivos,2.3055555555555554,18
+143,Molde/ Ferramental/Calderaria,Stress,2.5833333333333335,18
+144,Molde/ Ferramental/Calderaria,Transparência do papel,3.296296296296296,18
+145,Montagem/Solda,Apoio social colegas,3.403225806451613,62
+146,Montagem/Solda,Apoio social superiores,3.268817204301075,62
+147,Montagem/Solda,Autoeficácia,4.016129032258065,62
+148,Montagem/Solda,Burnout,2.9516129032258065,62
+149,Montagem/Solda,Comportamentos ofensivos,1.1653225806451613,62
+150,Montagem/Solda,Compromisso,3.056451612903226,62
+151,Montagem/Solda,Comunidade social,3.9731182795698925,62
+152,Montagem/Solda,Confiança horizontal,2.5483870967741935,62
+153,Montagem/Solda,Confiança vertical,3.39247311827957,62
+154,Montagem/Solda,Conflito trabalho-família,2.8440860215053765,62
+155,Montagem/Solda,Conflitos de papéis,2.7526881720430105,62
+156,Montagem/Solda,Exigências cognitivas,3.811827956989247,62
+157,Montagem/Solda,Exigências emocionais,3.096774193548387,62
+158,Montagem/Solda,Exigências quantitativas,2.9408602150537635,62
+159,Montagem/Solda,Influência no trabalho,2.463709677419355,62
+160,Montagem/Solda,Insegurança laboral,3.3870967741935485,62
+161,Montagem/Solda,Justiça e respeito,3.521505376344086,62
+162,Montagem/Solda,Possibilidades de desenvolvimento,3.736559139784946,62
+163,Montagem/Solda,Previsibilidade,3.2016129032258065,62
+164,Montagem/Solda,Problemas de sono,2.556451612903226,62
+165,Montagem/Solda,Qualidade da liderança,3.4919354838709675,62
+166,Montagem/Solda,Recompensas,3.7849462365591395,62
+167,Montagem/Solda,Ritmo de trabalho,3.3870967741935485,62
+168,Montagem/Solda,Satisfação,3.274193548387097,62
+169,Montagem/Solda,Saúde geral,2.6774193548387095,62
+170,Montagem/Solda,Significado do trabalho,3.9139784946236555,62
+171,Montagem/Solda,Sintomas depressivos,2.3306451612903225,62
+172,Montagem/Solda,Stress,2.661290322580645,62
+173,Montagem/Solda,Transparência do papel,4.204301075268818,62
+174,Picking,Apoio social colegas,2.9629629629629632,9
+175,Picking,Apoio social superiores,2.814814814814815,9
+176,Picking,Autoeficácia,3.7222222222222223,9
+177,Picking,Burnout,2.5555555555555554,9
+178,Picking,Comportamentos ofensivos,1.3055555555555556,9
+179,Picking,Compromisso,2.9444444444444446,9
+180,Picking,Comunidade social,3.4814814814814814,9
+181,Picking,Confiança horizontal,2.4444444444444446,9
+182,Picking,Confiança vertical,3.259259259259259,9
+183,Picking,Conflito trabalho-família,2.7037037037037037,9
+184,Picking,Conflitos de papéis,2.888888888888889,9
+185,Picking,Exigências cognitivas,3.592592592592593,9
+186,Picking,Exigências emocionais,3.7777777777777777,9
+187,Picking,Exigências quantitativas,2.7777777777777777,9
+188,Picking,Influência no trabalho,2.3333333333333335,9
+189,Picking,Insegurança laboral,2.7777777777777777,9
+190,Picking,Justiça e respeito,3.2222222222222223,9
+191,Picking,Possibilidades de desenvolvimento,3.7777777777777777,9
+192,Picking,Previsibilidade,2.8333333333333335,9
+193,Picking,Problemas de sono,2.111111111111111,9
+194,Picking,Qualidade da liderança,3.25,9
+195,Picking,Recompensas,3.6666666666666665,9
+196,Picking,Ritmo de trabalho,3.4444444444444446,9
+197,Picking,Satisfação,2.8333333333333335,9
+198,Picking,Saúde geral,2.5555555555555554,9
+199,Picking,Significado do trabalho,3.8518518518518516,9
+200,Picking,Sintomas depressivos,1.9444444444444444,9
+201,Picking,Stress,2.2777777777777777,9
+202,Picking,Transparência do papel,3.8518518518518516,9
+203,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Apoio social colegas,3.453333333333333,25
+204,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Apoio social superiores,3.3066666666666666,25
+205,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Autoeficácia,4.12,25
+206,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Burnout,3.0,25
+207,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Comportamentos ofensivos,1.07,25
+208,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Compromisso,3.08,25
+209,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Comunidade social,3.72,25
+210,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Confiança horizontal,3.266666666666667,25
+211,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Confiança vertical,3.3466666666666667,25
+212,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Conflito trabalho-família,2.12,25
+213,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Conflitos de papéis,2.746666666666667,25
+214,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Exigências cognitivas,3.76,25
+215,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Exigências emocionais,2.92,25
+216,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Exigências quantitativas,2.5066666666666664,25
+217,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Influência no trabalho,2.99,25
+218,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Insegurança laboral,2.6,25
+219,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Justiça e respeito,3.04,25
+220,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Possibilidades de desenvolvimento,4.226666666666667,25
+221,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Previsibilidade,3.82,25
+222,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Problemas de sono,2.84,25
+223,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Qualidade da liderança,3.65,25
+224,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Recompensas,4.093333333333333,25
+225,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Ritmo de trabalho,3.04,25
+226,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Satisfação,3.14,25
+227,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Saúde geral,3.4,25
+228,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Significado do trabalho,4.24,25
+229,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Sintomas depressivos,2.84,25
+230,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Stress,2.56,25
+231,Técnico ADM/Vendas/RH/Financeiro/Administrativo,Transparência do papel,4.1466666666666665,25
