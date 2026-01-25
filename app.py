@@ -349,7 +349,7 @@ with st.sidebar:
                 <img src="data:image/png;base64,{logo_base64}" alt="Logo" style='width: clamp(100px, 25vw, 150px); height: auto; margin-bottom: 1rem; filter: drop-shadow(0 4px 12px rgba(168, 136, 70, 0.3)); border-radius: 12px;'/>
                 <p style='margin: 0 0 1.5rem 0; font-size: clamp(0.9rem, 2.2vw, 1.1rem); color: #6b5847; font-weight: 600; letter-spacing: 1px; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);'>Luana Portella</p>
                 <div style='height: 2px; width: clamp(50px, 15vw, 70px); margin: 1.2rem auto; background: linear-gradient(90deg, transparent, #c4a672, transparent); box-shadow: 0 0 8px rgba(196, 166, 114, 0.5);'></div>
-                <p style='margin: 0; font-size: clamp(0.65rem, 1.8vw, 0.8rem); color: #6b5847; font-weight: 700; letter-spacing: clamp(1.5px, 0.5vw, 2.5px); text-transform: uppercase; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);'>Gestão de Riscos Psicossociais</p>
+                <p style='margin: 0; font-size: clamp(0.65rem, 1.8vw, 0.8rem); color: #6b5847; font-weight: 700; letter-spacing: clamp(1.5px, 0.5vw, 2.5px); text-transform: uppercase; text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);'>Gestão dos Fatores de Riscos Psicossociais</p>
             </div>
         </div>
         <style>
