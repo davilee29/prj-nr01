@@ -1,9 +1,9 @@
 ,subescala,classe_risco,qtd
-0,Apoio social colegas,alto,14
-1,Apoio social colegas,baixo,87
+0,Apoio social colegas,alto,87
+1,Apoio social colegas,baixo,14
 2,Apoio social colegas,medio,76
-3,Apoio social superiores,alto,24
-4,Apoio social superiores,baixo,84
+3,Apoio social superiores,alto,84
+4,Apoio social superiores,baixo,24
 5,Apoio social superiores,medio,69
 6,Autoeficácia,alto,2
 7,Autoeficácia,baixo,121
@@ -17,8 +17,8 @@
 15,Compromisso,alto,34
 16,Compromisso,baixo,48
 17,Compromisso,medio,95
-18,Comunidade social,alto,5
-19,Comunidade social,baixo,130
+18,Comunidade social,alto,130
+19,Comunidade social,baixo,5
 20,Comunidade social,medio,42
 21,Confiança horizontal,alto,28
 22,Confiança horizontal,baixo,22
@@ -40,8 +40,8 @@
 38,Exigências quantitativas,alto,44
 39,Exigências quantitativas,baixo,31
 40,Exigências quantitativas,medio,102
-41,Influência no trabalho,alto,63
-42,Influência no trabalho,baixo,27
+41,Influência no trabalho,alto,27
+42,Influência no trabalho,baixo,63
 43,Influência no trabalho,medio,87
 44,Insegurança laboral,alto,74
 45,Insegurança laboral,baixo,67
@@ -49,11 +49,11 @@
 47,Justiça e respeito,alto,19
 48,Justiça e respeito,baixo,92
 49,Justiça e respeito,medio,66
-50,Possibilidades de desenvolvimento,alto,3
-51,Possibilidades de desenvolvimento,baixo,131
+50,Possibilidades de desenvolvimento,alto,131
+51,Possibilidades de desenvolvimento,baixo,3
 52,Possibilidades de desenvolvimento,medio,43
-53,Previsibilidade,alto,31
-54,Previsibilidade,baixo,64
+53,Previsibilidade,alto,64
+54,Previsibilidade,baixo,31
 55,Previsibilidade,medio,82
 56,Problemas de sono,alto,33
 57,Problemas de sono,baixo,89
@@ -61,8 +61,8 @@
 59,Qualidade da liderança,alto,18
 60,Qualidade da liderança,baixo,88
 61,Qualidade da liderança,medio,71
-62,Recompensas,alto,8
-63,Recompensas,baixo,134
+62,Recompensas,alto,134
+63,Recompensas,baixo,8
 64,Recompensas,medio,35
 65,Ritmo de trabalho,alto,73
 66,Ritmo de trabalho,baixo,34
@@ -82,6 +82,6 @@
 80,Stress,alto,39
 81,Stress,baixo,62
 82,Stress,medio,76
-83,Transparência do papel,alto,1
-84,Transparência do papel,baixo,149
+83,Transparência do papel,alto,149
+84,Transparência do papel,baixo,1
 85,Transparência do papel,medio,27
