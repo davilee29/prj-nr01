@@ -1754,22 +1754,14 @@ elif pagina == "Análise por Cargo":
     
     # ===== DEFINIR ESCALAS POSITIVAS E NEGATIVAS =====
     escalas_positivas = {
-        "Influência no trabalho",
-        "Possibilidades de desenvolvimento",
-        "Previsibilidade",
-        "Transparência do papel",
-        "Recompensas",
-        "Apoio social colegas",
-        "Apoio social superiores",
-        "Comunidade social",
-        "Qualidade da liderança",
-        "Confiança horizontal",
-        "Confiança vertical",
-        "Justiça e respeito",
-        "Autoeficácia",
-        "Significado do trabalho",
-        "Compromisso",
-        "Satisfação"
+        "Qualidade da liderança",          
+        "Confiança horizontal",            
+        "Confiança vertical",              
+        "Justiça e respeito",              
+        "Autoeficácia",                    
+        "Significado do trabalho",         
+        "Compromisso",                     
+        "Satisfação"                       
     }
     
     cargos_unicos = filtered_cargo['cargo'].nunique()
@@ -2378,22 +2370,14 @@ elif pagina == "Análise por Setor":
     
     # ===== DEFINIR ESCALAS POSITIVAS E NEGATIVAS =====
     escalas_positivas = {
-        "Influência no trabalho",
-        "Possibilidades de desenvolvimento",
-        "Previsibilidade",
-        "Transparência do papel",
-        "Recompensas",
-        "Apoio social colegas",
-        "Apoio social superiores",
-        "Comunidade social",
-        "Qualidade da liderança",
-        "Confiança horizontal",
-        "Confiança vertical",
-        "Justiça e respeito",
-        "Autoeficácia",
-        "Significado do trabalho",
-        "Compromisso",
-        "Satisfação"
+        "Qualidade da liderança",          
+        "Confiança horizontal",            
+        "Confiança vertical",              
+        "Justiça e respeito",              
+        "Autoeficácia",                    
+        "Significado do trabalho",         
+        "Compromisso",                     
+        "Satisfação"   
     }
     
     setores_unicos = filtered_setor['setor'].nunique()
