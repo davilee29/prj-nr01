@@ -2817,32 +2817,47 @@ elif pagina == "Matriz de Risco":
         st.warning("Nenhum dado encontrado com os filtros selecionados. Ajuste os filtros acima.")
         st.stop()
     
-    # Função para classificar o risco baseado na matriz fornecida
+    # ===== FUNÇÃO CORRIGIDA =====
     def classificar_risco(prob, sev):
-        # Probabilidade: % de pessoas em risco alto
-        if prob >= 0.60:  # 60%+ pessoas = Permanente
+        """
+        Classifica o risco com base em probabilidade e severidade.
+        
+        Probabilidade (prob): % de pessoas em risco alto (0-1)
+        - ≥0.60 (≥60%) = Permanente (peso 2.0)
+        - 0.40-0.59 (40-59%) = Intermitente (peso 1.5)
+        - 0.20-0.39 (20-39%) = Esporádica (peso 1.0)
+        - <0.20 (<20%) = Eventual (peso 0.5)
+        
+        Severidade (sev): Score médio (0-5)
+        - >3.66 = Crítica (peso 10.0)
+        - 2.33-3.66 = Grave (peso 3.0)
+        - 1.50-2.33 = Moderada (peso 2.0)
+        - <1.50 = Leve (peso 1.0)
+        """
+        # Mapear probabilidade para peso
+        if prob >= 0.60:  # 60%+ = Permanente (A)
             prob_peso = 2.0
-        elif prob >= 0.40:  # 40-60% = Intermitente
+        elif prob >= 0.40:  # 40-60% = Intermitente (B)
             prob_peso = 1.5
-        elif prob >= 0.20:  # 20-40% = Esporádica
+        elif prob >= 0.20:  # 20-40% = Esporádica (C)
             prob_peso = 1.0
-        else:  # Menos de 20% = Eventual
+        else:  # <20% = Eventual (D)
             prob_peso = 0.5
         
-        # Severidade: quão grave é (escala 0-5)
-        if sev > 3.66:  # Muito grave
+        # Mapear severidade para peso (alinhado com risk_class)
+        if sev > 3.66:  # Crítica (IV)
             sev_peso = 10.0
-        elif sev >= 2.33:  # Grave
+        elif sev >= 2.33:  # Grave (III)
             sev_peso = 3.0
-        elif sev >= 1.50:  # Moderado
+        elif sev >= 1.50:  # Moderada (II)
             sev_peso = 2.0
-        else:  # Leve
+        else:  # Leve (I)
             sev_peso = 1.0
         
-        # Multiplica para ver o risco total
+        # Calcular pontuação
         pontuacao = prob_peso * sev_peso
         
-        # Classifica o resultado final
+        # Classificar resultado
         if pontuacao >= 5.0:
             return 'CRÍTICO', pontuacao
         elif pontuacao >= 3.0:
@@ -3049,36 +3064,38 @@ elif pagina == "Matriz de Risco":
             </div>
     """, unsafe_allow_html=True)
     
+    # Normalizar probabilidade para eixo X (0-10)
     filtered_matriz2['prob_norm'] = filtered_matriz2['probabilidade'] * 10
     
     matriz_height = calculate_responsive_height(len(filtered_matriz2), min_height=600, item_height=25, max_height=850)
     
     fig7 = go.Figure()
 
-    fig7.add_shape(type="rect", x0=7.5, y0=4.5, x1=10, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=5, y0=4.5, x1=7.5, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=2.5, y0=4.5, x1=5, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=0, y0=4.5, x1=2.5, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=7.5, y0=3, x1=10, y1=4.5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
+    # ===== ZONAS COLORIDAS CORRIGIDAS =====
+    # ZONAS CRÍTICAS (Vermelho) - Severidade > 3.66
+    fig7.add_shape(type="rect", x0=6, y0=3.66, x1=10, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=4, y0=3.66, x1=6, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=2, y0=3.66, x1=4, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=0, y0=3.66, x1=2, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
     
-    fig7.add_shape(type="rect", x0=5, y0=3, x1=7.5, y1=4.5, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=2.5, y0=3, x1=5, y1=4.5, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=7.5, y0=2, x1=10, y1=3, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=5, y0=2, x1=7.5, y1=3, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
+    # ZONAS ALTAS (Laranja) - Severidade 2.33-3.66, Probabilidade conforme
+    fig7.add_shape(type="rect", x0=6, y0=2.33, x1=10, y1=3.66, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=4, y0=2.33, x1=6, y1=3.66, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=2, y0=2.33, x1=4, y1=3.66, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
     
-    fig7.add_shape(type="rect", x0=0, y0=3, x1=2.5, y1=4.5, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=2.5, y0=2, x1=5, y1=3, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=7.5, y0=1, x1=10, y1=2, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=5, y0=1, x1=7.5, y1=2, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
+    # ZONAS MÉDIAS (Amarelo) - Severidade 1.50-2.33 ou combinações que dão Médio
+    fig7.add_shape(type="rect", x0=0, y0=2.33, x1=2, y1=3.66, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=2, y0=1.50, x1=4, y1=2.33, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=4, y0=1.50, x1=6, y1=2.33, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=6, y0=1.50, x1=10, y1=2.33, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
     
-    fig7.add_shape(type="rect", x0=0, y0=2, x1=2.5, y1=3, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=2.5, y0=1, x1=5, y1=2, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=0, y0=1, x1=2.5, y1=2, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=7.5, y0=0, x1=10, y1=1, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=5, y0=0, x1=7.5, y1=1, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=2.5, y0=0, x1=5, y1=1, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
-    fig7.add_shape(type="rect", x0=0, y0=0, x1=2.5, y1=1, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    # ZONAS BAIXAS (Azul) - Severidade < 1.50
+    fig7.add_shape(type="rect", x0=0, y0=0, x1=2, y1=1.50, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=2, y0=0, x1=4, y1=1.50, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=4, y0=0, x1=6, y1=1.50, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
+    fig7.add_shape(type="rect", x0=6, y0=0, x1=10, y1=1.50, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
     
+    # Adicionar pontos por classificação
     color_map_class = {
         'CRÍTICO': '#dc2626',
         'ALTO': '#f59e0b',
@@ -3107,29 +3124,29 @@ elif pagina == "Matriz de Risco":
                 customdata=df_class[['probabilidade', 'pontuacao']].values
             ))
     
-    fig7.add_hline(y=4.5, line_dash="dash", line_color="#dc2626", line_width=2.5, 
-                annotation_text="Severidade Crítica", annotation_position="right",
+    # ===== LINHAS HORIZONTAIS CORRIGIDAS =====
+    fig7.add_hline(y=3.66, line_dash="dash", line_color="#dc2626", line_width=2.5, 
+                annotation_text="Severidade Crítica (>3.66)", annotation_position="right",
                 annotation_font=dict(size=12, color='#dc2626', family='Arial', weight='bold'))
-    fig7.add_hline(y=3, line_dash="dash", line_color="#f59e0b", line_width=2,
-                annotation_text="Severidade Grave", annotation_position="right",
+    fig7.add_hline(y=2.33, line_dash="dash", line_color="#f59e0b", line_width=2,
+                annotation_text="Severidade Grave (2.33-3.66)", annotation_position="right",
                 annotation_font=dict(size=11, color='#f59e0b', family='Arial'))
-    fig7.add_hline(y=2, line_dash="dash", line_color="#eab308", line_width=1.5,
-                annotation_text="Severidade Moderada", annotation_position="right",
-                annotation_font=dict(size=10, color='#eab308', family='Arial'))
-    fig7.add_hline(y=1, line_dash="dash", line_color="#3b82f6", line_width=1.5,
-                annotation_text="Severidade Leve", annotation_position="right",
-                annotation_font=dict(size=10, color='#3b82f6', family='Arial'))
-    
-    fig7.add_vline(x=7.5, line_dash="dash", line_color="#dc2626", line_width=2.5,
-                annotation_text="Prob. Permanente", annotation_position="top",
-                annotation_font=dict(size=12, color='#dc2626', family='Arial', weight='bold'))
-    fig7.add_vline(x=5, line_dash="dash", line_color="#f59e0b", line_width=2,
-                annotation_text="Prob. Intermitente", annotation_position="top",
-                annotation_font=dict(size=11, color='#f59e0b', family='Arial'))
-    fig7.add_vline(x=2.5, line_dash="dash", line_color="#eab308", line_width=1.5,
-                annotation_text="Prob. Esporádica", annotation_position="top",
+    fig7.add_hline(y=1.50, line_dash="dash", line_color="#eab308", line_width=1.5,
+                annotation_text="Severidade Moderada (1.50-2.33)", annotation_position="right",
                 annotation_font=dict(size=10, color='#eab308', family='Arial'))
     
+    # ===== LINHAS VERTICAIS CORRIGIDAS =====
+    fig7.add_vline(x=6, line_dash="dash", line_color="#dc2626", line_width=2.5,
+                annotation_text="Prob. Permanente (60%)", annotation_position="top",
+                annotation_font=dict(size=12, color='#dc2626', family='Arial', weight='bold'))
+    fig7.add_vline(x=4, line_dash="dash", line_color="#f59e0b", line_width=2,
+                annotation_text="Prob. Intermitente (40%)", annotation_position="top",
+                annotation_font=dict(size=11, color='#f59e0b', family='Arial'))
+    fig7.add_vline(x=2, line_dash="dash", line_color="#eab308", line_width=1.5,
+                annotation_text="Prob. Esporádica (20%)", annotation_position="top",
+                annotation_font=dict(size=10, color='#eab308', family='Arial'))
+    
+    # Layout
     layout_config = create_responsive_layout_config()
     fig7.update_layout(
         **layout_config,
