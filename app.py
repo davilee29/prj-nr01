@@ -2376,6 +2376,26 @@ elif pagina == "Análise por Setor":
         st.warning("Nenhum dado encontrado com os filtros selecionados. Ajuste os filtros acima.")
         st.stop()
     
+    # ===== DEFINIR ESCALAS POSITIVAS E NEGATIVAS =====
+    escalas_positivas = {
+        "Influência no trabalho",
+        "Possibilidades de desenvolvimento",
+        "Previsibilidade",
+        "Transparência do papel",
+        "Recompensas",
+        "Apoio social colegas",
+        "Apoio social superiores",
+        "Comunidade social",
+        "Qualidade da liderança",
+        "Confiança horizontal",
+        "Confiança vertical",
+        "Justiça e respeito",
+        "Autoeficácia",
+        "Significado do trabalho",
+        "Compromisso",
+        "Satisfação"
+    }
+    
     setores_unicos = filtered_setor['setor'].nunique()
     setor_media = filtered_setor.groupby('setor')['media'].mean()
     setor_critico = setor_media.idxmax()
@@ -2522,70 +2542,173 @@ elif pagina == "Análise por Setor":
         </div>
     """, unsafe_allow_html=True)
     
+    # ===== HEATMAP 1: PROBLEMAS (ESCALAS NEGATIVAS) =====
     st.markdown("""
-        <div style='background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 242, 230, 0.9) 100%);
+        <div style='background: linear-gradient(135deg, rgba(220, 38, 38, 0.08) 0%, rgba(185, 28, 28, 0.05) 100%);
                     padding: clamp(1.5rem, 3vw, 2rem);
                     border-radius: clamp(12px, 2vw, 16px);
-                    border: 2px solid rgba(196, 166, 114, 0.2);
-                    box-shadow: 0 4px 16px rgba(107, 88, 71, 0.08);
+                    border: 2px solid rgba(220, 38, 38, 0.2);
+                    border-left: 4px solid #dc2626;
+                    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.08);
                     margin-bottom: 2rem;'>
-            <div style='margin-bottom: 1.5rem;'>
-                <h3 style='margin: 0; color: #5a4a3a; font-size: clamp(1.2rem, 3vw, 1.4rem); font-weight: 700;'>
-                    Mapa de Calor: Risco por Setor × Dimensão
-                </h3>
-                <p style='margin: 0.4rem 0 0 0; color: #8b7663; font-size: clamp(0.8rem, 2vw, 0.9rem);'>
-                    Cores mais intensas (vermelho) indicam scores mais altos - Identifica padrões de risco por área
-                </p>
+            <div style='display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;'>
+                <div style='width: 48px; height: 48px;
+                            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+                            border-radius: 10px;
+                            display: flex; align-items: center; justify-content: center;
+                            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);'>
+                    <svg width="24" height="24" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 style='margin: 0; color: #991b1b; font-size: clamp(1.2rem, 3vw, 1.4rem); font-weight: 700;'>
+                        Mapa de Problemas por Setor
+                    </h3>
+                    <p style='margin: 0.3rem 0 0 0; color: #7f1d1d; font-size: clamp(0.8rem, 2vw, 0.9rem);'>
+                        Quanto mais vermelho, maior o problema - Identifica onde os riscos são mais graves por área
+                    </p>
+                </div>
             </div>
     """, unsafe_allow_html=True)
     
-    setor_pivot = filtered_setor.pivot_table(
-        index='setor',
-        columns='subescala',
-        values='media',
-        aggfunc='mean'
-    )
+    # Filtrar apenas escalas NEGATIVAS
+    filtered_setor_neg = filtered_setor[~filtered_setor['subescala'].isin(escalas_positivas)]
     
-    num_setores = len(setor_pivot)
-    num_subescalas_setor = len(setor_pivot.columns)
-    heatmap_height_setor = calculate_responsive_height(num_setores, min_height=500, item_height=45)
-
-    fig_heatmap = go.Figure(data=go.Heatmap(
-        z=setor_pivot.values,
-        x=setor_pivot.columns,
-        y=setor_pivot.index,
-        colorscale='RdYlGn_r',
-        text=setor_pivot.values.round(2),
-        texttemplate='%{text}' if show_values_setor else '',
-        textfont={"size": 12, "color": "#1e293b", "family": "Arial", "weight": "bold"},
-        colorbar=dict(
-            title=dict(
-                text="Score<br>Médio",
-                side='right',
-                font=dict(size=13, color='#5a4a3a', family='Arial', weight='bold')
-            ),
-            tickfont=dict(size=12, color='#6b5847', family='Arial', weight='bold')
-        ),
-        hovertemplate='<b>%{y}</b><br>%{x}<br>Score: <b>%{z:.2f}</b><extra></extra>'
-    ))
-
-    layout_config = create_responsive_layout_config()
-    fig_heatmap.update_layout(
-        **layout_config,
-        height=heatmap_height_setor,
-        xaxis=dict(
-            title='',
-            tickfont=dict(size=13, color='#5a4a3a', family='Arial', weight='bold'),
-            tickangle=-45
-        ),
-        yaxis=dict(
-            title='',
-            tickfont=dict(size=13, color='#5a4a3a', family='Arial', weight='bold')
+    if len(filtered_setor_neg) > 0:
+        setor_pivot_neg = filtered_setor_neg.pivot_table(
+            index='setor',
+            columns='subescala',
+            values='media',
+            aggfunc='mean'
         )
-    )
-    st.plotly_chart(fig_heatmap, use_container_width=True, config={'responsive': True, 'displayModeBar': False})
+        
+        num_setores_neg = len(setor_pivot_neg)
+        heatmap_height_setor_neg = calculate_responsive_height(num_setores_neg, min_height=500, item_height=45)
+
+        fig_heatmap_neg = go.Figure(data=go.Heatmap(
+            z=setor_pivot_neg.values,
+            x=setor_pivot_neg.columns,
+            y=setor_pivot_neg.index,
+            colorscale='RdYlGn_r',  # Vermelho = Alto = RUIM ✅
+            text=setor_pivot_neg.values.round(2),
+            texttemplate='%{text}' if show_values_setor else '',
+            textfont={"size": 12, "color": "#1e293b", "family": "Arial", "weight": "bold"},
+            colorbar=dict(
+                title=dict(
+                    text="Score<br>(Problema)",
+                    side='right',
+                    font=dict(size=13, color='#991b1b', family='Arial', weight='bold')
+                ),
+                tickfont=dict(size=12, color='#7f1d1d', family='Arial', weight='bold')
+            ),
+            hovertemplate='<b>%{y}</b><br>%{x}<br>Score: <b>%{z:.2f}</b><br>(Quanto maior, pior)<extra></extra>'
+        ))
+
+        layout_config = create_responsive_layout_config()
+        fig_heatmap_neg.update_layout(
+            **layout_config,
+            height=heatmap_height_setor_neg,
+            xaxis=dict(
+                title='',
+                tickfont=dict(size=13, color='#991b1b', family='Arial', weight='bold'),
+                tickangle=-45
+            ),
+            yaxis=dict(
+                title='',
+                tickfont=dict(size=13, color='#991b1b', family='Arial', weight='bold')
+            )
+        )
+        st.plotly_chart(fig_heatmap_neg, use_container_width=True, config={'responsive': True, 'displayModeBar': False})
+    else:
+        st.info("Nenhuma escala negativa (problemas) selecionada nos filtros.")
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+    
+    # ===== HEATMAP 2: PROTEÇÕES (ESCALAS POSITIVAS) =====
+    st.markdown("""
+        <div style='background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.05) 100%);
+                    padding: clamp(1.5rem, 3vw, 2rem);
+                    border-radius: clamp(12px, 2vw, 16px);
+                    border: 2px solid rgba(16, 185, 129, 0.2);
+                    border-left: 4px solid #10b981;
+                    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.08);
+                    margin-bottom: 2rem;'>
+            <div style='display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;'>
+                <div style='width: 48px; height: 48px;
+                            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                            border-radius: 10px;
+                            display: flex; align-items: center; justify-content: center;
+                            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);'>
+                    <svg width="24" height="24" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 style='margin: 0; color: #065f46; font-size: clamp(1.2rem, 3vw, 1.4rem); font-weight: 700;'>
+                        Mapa de Proteções por Setor
+                    </h3>
+                    <p style='margin: 0.3rem 0 0 0; color: #064e3b; font-size: clamp(0.8rem, 2vw, 0.9rem);'>
+                        Quanto mais verde, maior a proteção - Identifica onde há mais fatores protetivos por área
+                    </p>
+                </div>
+            </div>
+    """, unsafe_allow_html=True)
+    
+    # Filtrar apenas escalas POSITIVAS
+    filtered_setor_pos = filtered_setor[filtered_setor['subescala'].isin(escalas_positivas)]
+    
+    if len(filtered_setor_pos) > 0:
+        setor_pivot_pos = filtered_setor_pos.pivot_table(
+            index='setor',
+            columns='subescala',
+            values='media',
+            aggfunc='mean'
+        )
+        
+        num_setores_pos = len(setor_pivot_pos)
+        heatmap_height_setor_pos = calculate_responsive_height(num_setores_pos, min_height=500, item_height=45)
+
+        fig_heatmap_pos = go.Figure(data=go.Heatmap(
+            z=setor_pivot_pos.values,
+            x=setor_pivot_pos.columns,
+            y=setor_pivot_pos.index,
+            colorscale='RdYlGn',  # Verde = Alto = BOM ✅ (sem o _r!)
+            text=setor_pivot_pos.values.round(2),
+            texttemplate='%{text}' if show_values_setor else '',
+            textfont={"size": 12, "color": "#1e293b", "family": "Arial", "weight": "bold"},
+            colorbar=dict(
+                title=dict(
+                    text="Score<br>(Proteção)",
+                    side='right',
+                    font=dict(size=13, color='#065f46', family='Arial', weight='bold')
+                ),
+                tickfont=dict(size=12, color='#064e3b', family='Arial', weight='bold')
+            ),
+            hovertemplate='<b>%{y}</b><br>%{x}<br>Score: <b>%{z:.2f}</b><br>(Quanto maior, melhor)<extra></extra>'
+        ))
+
+        layout_config = create_responsive_layout_config()
+        fig_heatmap_pos.update_layout(
+            **layout_config,
+            height=heatmap_height_setor_pos,
+            xaxis=dict(
+                title='',
+                tickfont=dict(size=13, color='#065f46', family='Arial', weight='bold'),
+                tickangle=-45
+            ),
+            yaxis=dict(
+                title='',
+                tickfont=dict(size=13, color='#065f46', family='Arial', weight='bold')
+            )
+        )
+        st.plotly_chart(fig_heatmap_pos, use_container_width=True, config={'responsive': True, 'displayModeBar': False})
+    else:
+        st.info("Nenhuma escala positiva (proteções) selecionada nos filtros.")
+    
     st.markdown("</div>", unsafe_allow_html=True)
 
+    # ===== RANKING (CONTINUA IGUAL) =====
     st.markdown("""
         <div style='background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 242, 230, 0.9) 100%);
                     padding: clamp(1.5rem, 3vw, 2rem);
