@@ -2819,46 +2819,30 @@ elif pagina == "Matriz de Risco":
     
     # Função para classificar o risco baseado na matriz fornecida
     def classificar_risco(prob, sev):
-        # Probabilidade: A (Permanente=2.0), B (Intermitente=1.5), C (Esporádica=1.0), D (Eventual=0.5)
-        # Severidade: IV (Crítica=10.0), III (Grave=3.0), II (Moderada=2.0), I (Leve=1.0)
-        
-        # Mapear probabilidade para categoria (assumindo escala 0-1)
-        if prob >= 0.75:  # Permanente
-            prob_cat = 'A'
+        # Probabilidade: % de pessoas em risco alto
+        if prob >= 0.60:  # 60%+ pessoas = Permanente
             prob_peso = 2.0
-        elif prob >= 0.50:  # Intermitente
-            prob_cat = 'B'
+        elif prob >= 0.40:  # 40-60% = Intermitente
             prob_peso = 1.5
-        elif prob >= 0.25:  # Esporádica
-            prob_cat = 'C'
+        elif prob >= 0.20:  # 20-40% = Esporádica
             prob_peso = 1.0
-        else:  # Eventual
-            prob_cat = 'D'
+        else:  # Menos de 20% = Eventual
             prob_peso = 0.5
         
-        # Mapear severidade para categoria (assumindo escala 0-5)
-        if sev >= 4.5:  # Crítica/Catastrófica
-            sev_cat = 'IV'
+        # Severidade: quão grave é (escala 0-5)
+        if sev > 3.66:  # Muito grave
             sev_peso = 10.0
-        elif sev >= 3.0:  # Grave
-            sev_cat = 'III'
+        elif sev >= 2.33:  # Grave
             sev_peso = 3.0
-        elif sev >= 2.0:  # Moderada
-            sev_cat = 'II'
+        elif sev >= 1.50:  # Moderado
             sev_peso = 2.0
         else:  # Leve
-            sev_cat = 'I'
             sev_peso = 1.0
         
-        # Calcular pontuação
+        # Multiplica para ver o risco total
         pontuacao = prob_peso * sev_peso
         
-        # Classificar baseado na matriz
-        # CRÍTICO: >= 5.0 (vermelho escuro)
-        # ALTO: >= 3.0 (laranja/amarelo)
-        # MÉDIO: >= 1.5 (verde claro/amarelo)
-        # BAIXO: < 1.5 (azul/verde)
-        
+        # Classifica o resultado final
         if pontuacao >= 5.0:
             return 'CRÍTICO', pontuacao
         elif pontuacao >= 3.0:
