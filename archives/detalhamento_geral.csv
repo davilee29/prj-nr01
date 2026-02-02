@@ -1,77 +1,77 @@
 subescala,pergunta,media,qtd,classe_risco
-Apoio social colegas,q27,3.8135593220338984,177,alto
+Apoio social colegas,q27,3.8135593220338984,177,baixo
 Apoio social colegas,q28,3.5762711864406778,177,medio
 Apoio social colegas,q29,3.0282485875706215,177,medio
 Apoio social superiores,q30,3.15819209039548,177,medio
-Apoio social superiores,q31,3.768361581920904,177,alto
+Apoio social superiores,q31,3.768361581920904,177,baixo
 Apoio social superiores,q32,3.1129943502824857,177,medio
-Autoeficácia,q49,4.028248587570621,177,alto
-Autoeficácia,q50,4.045197740112994,177,alto
-Burnout,q67,3.1299435028248586,177,medio
-Burnout,q68,2.864406779661017,177,medio
-Comportamentos ofensivos,q73,1.4180790960451977,177,baixo
-Comportamentos ofensivos,q74,1.0338983050847457,177,baixo
-Comportamentos ofensivos,q75,1.0451977401129944,177,baixo
-Comportamentos ofensivos,q76,1.0451977401129944,177,baixo
+Autoeficácia,q49,4.028248587570621,177,baixo
+Autoeficácia,q50,4.045197740112994,177,baixo
+Burnout,q67,2.8700564971751414,177,medio
+Burnout,q68,3.135593220338983,177,medio
+Comportamentos ofensivos,q73,4.581920903954802,177,alto
+Comportamentos ofensivos,q74,4.966101694915254,177,alto
+Comportamentos ofensivos,q75,4.954802259887006,177,alto
+Comportamentos ofensivos,q76,4.954802259887006,177,alto
 Compromisso,q54,3.146892655367232,177,medio
 Compromisso,q55,3.0395480225988702,177,medio
-Comunidade social,q33,4.440677966101695,177,alto
-Comunidade social,q34,4.107344632768362,177,alto
+Comunidade social,q33,4.440677966101695,177,baixo
+Comunidade social,q34,4.107344632768362,177,baixo
 Comunidade social,q35,3.5028248587570623,177,medio
-Confiança horizontal,q40,2.7062146892655368,177,medio
-Confiança horizontal,q41,2.446327683615819,177,medio
+Confiança horizontal,q40,3.2937853107344632,177,medio
+Confiança horizontal,q41,3.553672316384181,177,medio
 Confiança horizontal,q42,2.9548022598870056,177,medio
-Confiança vertical,q43,3.7401129943502824,177,alto
-Confiança vertical,q44,3.8757062146892656,177,alto
-Confiança vertical,q45,2.6440677966101696,177,medio
-Conflito trabalho-família,q62,2.7344632768361583,177,medio
-Conflito trabalho-família,q63,2.6610169491525424,177,medio
-Conflito trabalho-família,q64,2.983050847457627,177,medio
-Conflitos de papéis,q24,2.977401129943503,177,medio
-Conflitos de papéis,q25,2.8361581920903953,177,medio
-Conflitos de papéis,q26,2.6440677966101696,177,medio
-Exigências cognitivas,q5,4.790960451977401,177,alto
+Confiança vertical,q43,3.7401129943502824,177,baixo
+Confiança vertical,q44,3.8757062146892656,177,baixo
+Confiança vertical,q45,3.3559322033898304,177,medio
+Conflito trabalho-família,q62,3.2655367231638417,177,medio
+Conflito trabalho-família,q63,3.3389830508474576,177,medio
+Conflito trabalho-família,q64,3.016949152542373,177,medio
+Conflitos de papéis,q24,3.022598870056497,177,medio
+Conflitos de papéis,q25,3.1638418079096047,177,medio
+Conflitos de papéis,q26,3.3559322033898304,177,medio
+Exigências cognitivas,q5,1.2090395480225988,177,baixo
 Exigências cognitivas,q6,3.785310734463277,177,alto
-Exigências cognitivas,q7,3.0903954802259888,177,medio
-Exigências emocionais,q8,3.231638418079096,177,medio
-Exigências quantitativas,q1,2.5706214689265536,177,medio
-Exigências quantitativas,q2,2.5028248587570623,177,medio
-Exigências quantitativas,q3,3.672316384180791,177,alto
-Influência no trabalho,q10,2.169491525423729,177,baixo
+Exigências cognitivas,q7,2.9096045197740112,177,medio
+Exigências emocionais,q8,2.768361581920904,177,medio
+Exigências quantitativas,q1,3.4293785310734464,177,medio
+Exigências quantitativas,q2,3.4971751412429377,177,medio
+Exigências quantitativas,q3,2.327683615819209,177,baixo
+Influência no trabalho,q10,2.169491525423729,177,alto
 Influência no trabalho,q11,2.4124293785310735,177,medio
 Influência no trabalho,q12,2.9717514124293785,177,medio
-Influência no trabalho,q9,3.15819209039548,177,medio
-Insegurança laboral,q60,3.1016949152542375,177,medio
+Influência no trabalho,q9,2.84180790960452,177,medio
+Insegurança laboral,q60,2.8983050847457625,177,medio
 Justiça e respeito,q46,3.6271186440677967,177,medio
 Justiça e respeito,q47,3.5706214689265536,177,medio
 Justiça e respeito,q48,3.2824858757062145,177,medio
-Possibilidades de desenvolvimento,q13,4.248587570621469,177,alto
-Possibilidades de desenvolvimento,q14,3.8926553672316384,177,alto
-Possibilidades de desenvolvimento,q15,3.824858757062147,177,alto
+Possibilidades de desenvolvimento,q13,4.248587570621469,177,baixo
+Possibilidades de desenvolvimento,q14,3.8926553672316384,177,baixo
+Possibilidades de desenvolvimento,q15,3.824858757062147,177,baixo
 Previsibilidade,q16,3.1242937853107344,177,medio
 Previsibilidade,q17,3.5649717514124295,177,medio
-Problemas de sono,q65,2.5875706214689265,177,medio
-Problemas de sono,q66,2.4293785310734464,177,medio
+Problemas de sono,q65,3.4124293785310735,177,medio
+Problemas de sono,q66,3.5706214689265536,177,medio
 Qualidade da liderança,q36,3.4745762711864407,177,medio
 Qualidade da liderança,q37,3.5649717514124295,177,medio
 Qualidade da liderança,q38,3.5819209039548023,177,medio
 Qualidade da liderança,q39,3.632768361581921,177,medio
 Recompensas,q21,3.3728813559322033,177,medio
-Recompensas,q22,4.519774011299435,177,alto
-Recompensas,q23,3.994350282485876,177,alto
-Ritmo de trabalho,q4,3.288135593220339,177,medio
+Recompensas,q22,4.519774011299435,177,baixo
+Recompensas,q23,3.994350282485876,177,baixo
+Ritmo de trabalho,q4,2.711864406779661,177,medio
 Satisfação,q56,3.389830508474576,177,medio
 Satisfação,q57,3.0847457627118646,177,medio
 Satisfação,q58,3.3728813559322033,177,medio
 Satisfação,q59,3.367231638418079,177,medio
-Saúde geral,q61,2.689265536723164,177,medio
-Significado do trabalho,q51,4.19774011299435,177,alto
-Significado do trabalho,q52,4.231638418079096,177,alto
+Saúde geral,q61,3.310734463276836,177,medio
+Significado do trabalho,q51,4.19774011299435,177,baixo
+Significado do trabalho,q52,4.231638418079096,177,baixo
 Significado do trabalho,q53,3.638418079096045,177,medio
-Sintomas depressivos,q71,2.288135593220339,177,baixo
-Sintomas depressivos,q72,2.542372881355932,177,medio
-Stress,q69,2.7062146892655368,177,medio
-Stress,q70,2.8022598870056497,177,medio
-Transparência do papel,q18,3.7966101694915255,177,alto
-Transparência do papel,q19,4.6158192090395485,177,alto
-Transparência do papel,q20,4.169491525423729,177,alto
+Sintomas depressivos,q71,3.711864406779661,177,alto
+Sintomas depressivos,q72,3.457627118644068,177,medio
+Stress,q69,3.2937853107344632,177,medio
+Stress,q70,3.1977401129943503,177,medio
+Transparência do papel,q18,3.7966101694915255,177,baixo
+Transparência do papel,q19,4.6158192090395485,177,baixo
+Transparência do papel,q20,4.169491525423729,177,baixo
