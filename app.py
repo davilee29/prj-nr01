@@ -3047,7 +3047,7 @@ elif pagina == "Matriz de Risco":
         st.warning("Nenhum dado encontrado com os filtros selecionados. Ajuste os filtros acima.")
         st.stop()
     
-    # ===== FUNÇÃO CORRIGIDA =====
+    # ===== FUNÇÃO DE CLASSIFICAÇÃO DE RISCO =====
     def classificar_risco(prob, sev):
         """
         Classifica o risco com base em probabilidade e severidade.
@@ -3065,23 +3065,23 @@ elif pagina == "Matriz de Risco":
         - <1.50 = Leve (peso 1.0)
         """
         # Mapear probabilidade para peso
-        if prob >= 0.60:  # 60%+ = Permanente (A)
+        if prob >= 0.60:
             prob_peso = 2.0
-        elif prob >= 0.40:  # 40-60% = Intermitente (B)
+        elif prob >= 0.40:
             prob_peso = 1.5
-        elif prob >= 0.20:  # 20-40% = Esporádica (C)
+        elif prob >= 0.20:
             prob_peso = 1.0
-        else:  # <20% = Eventual (D)
+        else:
             prob_peso = 0.5
         
-        # Mapear severidade para peso (alinhado com risk_class)
-        if sev > 3.66:  # Crítica (IV)
+        # Mapear severidade para peso
+        if sev > 3.66:
             sev_peso = 10.0
-        elif sev >= 2.33:  # Grave (III)
+        elif sev >= 2.33:
             sev_peso = 3.0
-        elif sev >= 1.50:  # Moderada (II)
+        elif sev >= 1.50:
             sev_peso = 2.0
-        else:  # Leve (I)
+        else:
             sev_peso = 1.0
         
         # Calcular pontuação
@@ -3297,35 +3297,91 @@ elif pagina == "Matriz de Risco":
     # Normalizar probabilidade para eixo X (0-10)
     filtered_matriz2['prob_norm'] = filtered_matriz2['probabilidade'] * 10
     
+    # ===== FUNÇÃO PARA SEPARAR PONTOS SOBREPOSTOS =====
+    def separar_pontos_sobrepostos(df, threshold=0.4):
+        """Separa pontos que estão muito próximos na matriz"""
+        import numpy as np
+        
+        df_plot = df.copy()
+        positions = df_plot[['prob_norm', 'severidade']].values.astype(float)
+        n_points = len(positions)
+        
+        if n_points <= 1:
+            df_plot['prob_ajustado'] = df_plot['prob_norm']
+            df_plot['sev_ajustado'] = df_plot['severidade']
+            return df_plot
+        
+        # Aplicar deslocamento iterativo
+        for iteration in range(50):
+            moved = False
+            for i in range(n_points):
+                for j in range(i + 1, n_points):
+                    dx = positions[i, 0] - positions[j, 0]
+                    dy = positions[i, 1] - positions[j, 1]
+                    dist = np.sqrt(dx**2 + dy**2)
+                    
+                    if dist < threshold and dist > 0:
+                        # Normalizar vetor
+                        if dist > 0:
+                            dx /= dist
+                            dy /= dist
+                        else:
+                            angle = np.random.uniform(0, 2 * np.pi)
+                            dx = np.cos(angle)
+                            dy = np.sin(angle)
+                        
+                        # Aplicar deslocamento
+                        offset = 0.15
+                        positions[i, 0] += dx * offset
+                        positions[i, 1] += dy * offset
+                        positions[j, 0] -= dx * offset
+                        positions[j, 1] -= dy * offset
+                        moved = True
+            
+            if not moved:
+                break
+        
+        # Manter dentro dos limites
+        positions[:, 0] = np.clip(positions[:, 0], 0.5, 9.5)
+        positions[:, 1] = np.clip(positions[:, 1], 0.3, 4.7)
+        
+        df_plot['prob_ajustado'] = positions[:, 0]
+        df_plot['sev_ajustado'] = positions[:, 1]
+        
+        return df_plot
+    
+    # Aplicar separação de pontos
+    filtered_matriz2 = separar_pontos_sobrepostos(filtered_matriz2)
+    
     matriz_height = calculate_responsive_height(len(filtered_matriz2), min_height=600, item_height=25, max_height=850)
     
     fig7 = go.Figure()
 
-    # ===== ZONAS COLORIDAS CORRIGIDAS =====
+    # ===== ZONAS COLORIDAS =====
     # ZONAS CRÍTICAS (Vermelho) - Severidade > 3.66
     fig7.add_shape(type="rect", x0=6, y0=3.66, x1=10, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=4, y0=3.66, x1=6, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=2, y0=3.66, x1=4, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=0, y0=3.66, x1=2, y1=5, fillcolor="rgba(220, 38, 38, 0.15)", line=dict(width=0), layer="below")
     
-    # ZONAS ALTAS (Laranja) - Severidade 2.33-3.66, Probabilidade conforme
+    # ZONAS ALTAS (Laranja) - Severidade 2.33-3.66
     fig7.add_shape(type="rect", x0=6, y0=2.33, x1=10, y1=3.66, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=4, y0=2.33, x1=6, y1=3.66, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=2, y0=2.33, x1=4, y1=3.66, fillcolor="rgba(245, 158, 11, 0.12)", line=dict(width=0), layer="below")
     
-    # ZONAS MÉDIAS (Amarelo) - Severidade 1.50-2.33 ou combinações que dão Médio
+    # ZONAS MÉDIAS (Amarelo)
     fig7.add_shape(type="rect", x0=0, y0=2.33, x1=2, y1=3.66, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=2, y0=1.50, x1=4, y1=2.33, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=4, y0=1.50, x1=6, y1=2.33, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=6, y0=1.50, x1=10, y1=2.33, fillcolor="rgba(234, 179, 8, 0.10)", line=dict(width=0), layer="below")
     
-    # ZONAS BAIXAS (Azul) - Severidade < 1.50
+    # ZONAS BAIXAS (Azul)
     fig7.add_shape(type="rect", x0=0, y0=0, x1=2, y1=1.50, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=2, y0=0, x1=4, y1=1.50, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=4, y0=0, x1=6, y1=1.50, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
     fig7.add_shape(type="rect", x0=6, y0=0, x1=10, y1=1.50, fillcolor="rgba(59, 130, 246, 0.08)", line=dict(width=0), layer="below")
     
-    # Adicionar pontos por classificação
+    # Adicionar pontos por classificação COM SEPARAÇÃO VISUAL
     color_map_class = {
         'CRÍTICO': '#dc2626',
         'ALTO': '#f59e0b',
@@ -3337,8 +3393,8 @@ elif pagina == "Matriz de Risco":
         df_class = filtered_matriz2[filtered_matriz2['classificacao'] == classificacao]
         if len(df_class) > 0:
             fig7.add_trace(go.Scatter(
-                x=df_class['prob_norm'],
-                y=df_class['severidade'],
+                x=df_class['prob_ajustado'],  # ← USANDO POSIÇÕES AJUSTADAS
+                y=df_class['sev_ajustado'],   # ← USANDO POSIÇÕES AJUSTADAS
                 mode='markers+text' if show_labels_matriz2 else 'markers',
                 name=classificacao,
                 marker=dict(
@@ -3350,11 +3406,11 @@ elif pagina == "Matriz de Risco":
                 text=df_class['subescala'].str[:20] if show_labels_matriz2 else '',
                 textposition='top center',
                 textfont=dict(size=11, color='#1e293b', family='Arial', weight='bold'),
-                hovertemplate='<b>%{text}</b><br>Probabilidade: %{x:.1f}/10 (%{customdata[0]:.0%})<br>Severidade: %{y:.2f}/5<br>Pontuação: %{customdata[1]:.1f}<br><b>Risco: ' + classificacao + '</b><extra></extra>',
-                customdata=df_class[['probabilidade', 'pontuacao']].values
+                hovertemplate='<b>%{text}</b><br>Probabilidade: %{customdata[0]:.1f}/10 (%{customdata[1]:.0%})<br>Severidade: %{customdata[2]:.2f}/5<br>Pontuação: %{customdata[3]:.1f}<br><b>Risco: ' + classificacao + '</b><extra></extra>',
+                customdata=df_class[['prob_norm', 'probabilidade', 'severidade', 'pontuacao']].values
             ))
     
-    # ===== LINHAS HORIZONTAIS CORRIGIDAS =====
+    # ===== LINHAS HORIZONTAIS =====
     fig7.add_hline(y=3.66, line_dash="dash", line_color="#dc2626", line_width=2.5, 
                 annotation_text="Severidade Crítica (>3.66)", annotation_position="right",
                 annotation_font=dict(size=12, color='#dc2626', family='Arial', weight='bold'))
@@ -3365,7 +3421,7 @@ elif pagina == "Matriz de Risco":
                 annotation_text="Severidade Moderada (1.50-2.33)", annotation_position="right",
                 annotation_font=dict(size=10, color='#eab308', family='Arial'))
     
-    # ===== LINHAS VERTICAIS CORRIGIDAS =====
+    # ===== LINHAS VERTICAIS =====
     fig7.add_vline(x=6, line_dash="dash", line_color="#dc2626", line_width=2.5,
                 annotation_text="Prob. Permanente (60%)", annotation_position="top",
                 annotation_font=dict(size=12, color='#dc2626', family='Arial', weight='bold'))
